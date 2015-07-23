@@ -1,0 +1,13 @@
+# ===================================================
+#    Makefile for "face-detection"
+# ===================================================
+CC = g++
+DEBUG = -g 
+OPT = -cpu=core2
+CFLAGS = $(DEBUG) $(OPT) -I/Users/fab/mylibs/include
+LFLAGS = -L/Users/fab/mylibs/lib -lcv -lhighgui -lcxcore
+EXEC = main
+
+all: main.cpp
+	$(CC) $(CFLAGS) $(LFLAGS) main.cpp -o $(EXEC)
+

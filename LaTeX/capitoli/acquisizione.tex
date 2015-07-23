@@ -1,0 +1,83 @@
+\section{Premessa}
+Il capitolo si ordina nativamente come la struttura procedurale dell'algoritmo per l'acquisizione. Molte delle fasi esposte sono concettualmente afferenti ai grafici del capitolo ''risultati sperimentali'', i quali faranno ad esse riferimento univoco. La scelta di una presentazione divisa è motivata dal principio di separazione tra metodi e effetti dei metodi (outputs), oltre al voler mostrare i suddetti grafici in un blocco unico piuttosto che sparsi, dal momento che è questo proprio il modo in cui essi vengono presentati all'utente del programma.
+%----------------------------------------------------------------------------------------
+\section{Acquisizione del segnale video} % ACQUISIZIONE
+Il segnale video viene acquisito da una videocamera non professionale di fascia medio bassa, ed ha le seguenti caratteristiche:
+\mylist{24-bit RGB;3 canali monocromatici a 8 bits/canale;numero di frames acquisiti \mymath{N} a discrezione; frames per second (fps) a seconda delle prestazioni della macchina/camera; risoluzione in pixels a discrezione.}
+Alternativamente allo streaming in tempo reale, è possibile fornire in input un video in formato AVI pre-registrato. Tutte le voci 'a discrezione' verranno specificate nell'appendice B (parametri di programma).
+
+La bontà dell'algoritmo è stata provata attraverso la tecnica dei battiti al polso. Se ne discuterà nei risultati sperimentali.
+
+Dopo un ciclo di acquisizione di \mymath{N} frames essi sono pronti per essere processati dall'algoritmo che cercherà di ricavarne il battito cardiaco. Al termine del calcolo si riceve la stampa dei risultati ottenuti ed è possibile procedere ad una nuova acquisizione che inizi logicamente da dove si era interrotta la precedente (il che chiaramente per una cattura da file non introduce discontinuità, mentre potrebbe farlo per un'acquisizione live, sebbene si sia cercato di svalutare numericamente questo effetto). Per ragioni di efficienza si è adottato un passo di tipo `overlap' sui dati: ogni acquisizione dalla seconda in poi riguarda soltanto \mymath{OVERLAP<N} (parametro a discrezione) frames nuovi, mentre riutilizza i restanti \mymath{N-OVERLAP} frames precedenti per completare il blocco.
+%-----------------------------------------------------------------------------------------
+\section{Individuazione del fenomeno} % INDIVIDUA FENOMENO
+	\subsection{Scomposizione cromatica}
+Ciascun frame è pensabile come un array tridimensionale, dove due dimensioni mappano spazialmente un'intensità di colore, mentre la terza indicizza il canale di colore primario. Come specificato, il lavoro è basato su immagini a tre canali RGB (in italiano  rosso, verde e blu) ove ogni pixel (ogni cella atomica dotata di due coordinate e un'intensità) abbia per ciascun canale un valore compreso tra \mymath{0} e \mymath{2^8=256}.
+	\subsection{Creazione delle serie di differenze}
+Avendo scomposto in tre frames ogni singolo fotogramma in base al canale, occorre ora generare tre segnali temporali significativi per l'individuazione dei fenomeni sanguigni che porteranno all'obiettivo finale. Una soluzione semplice ed efficace è quella di costruire tre serie delle differenze finite \mymath{RR_R(t)},\, \mymath{RR_G(t)},\, \mymath{RR_B(t)} dai rispettivi \mymath{r_R(t)},\, \mymath{r_G(t)},\, \mymath{r_B(t)}, ovvero gli andamenti temporali delle medie spaziali dell'intensità di colore: e.g. \mymath{r_B(t_k)} rappresenta la media delle intensità di blu che si hanno per il k-esimo frame.
+\singlefig{acquisizione/scompos.png}{Il processo di scomposizione cromatica e di creazione delle tre serie di differenze.}{9.0}{figscomp}
+%-----------------------------------------------------------------------------------------
+\section{Rifinitura dei segnali} % RIFINITURA SEGNALI
+%----------------------------------------------------
+	\subsection{Detrending}	 % DETRENDING
+		\subsubsection{Fenomeno di tendenza}
+Si definisce trend una tendenza nei lunghi periodi predominante sulle altre e riscontrabile mediamente nelle realizzazioni di un processo stocastico. Questo andamento può essere di qualsiasi tipo, ma spesso delle modellizzazioni lineari o combinazioni lineari di esponenziali o armoniche sono sufficientemente fedeli al fenomeno. La prevalenza del trending lineare nel contesto del problema studiato (spesso associabile a fattori esogeni come la variazione di luminosità ambientale o al movimento relativo tra videocamera e area epidermica d'interesse) impedisce di focalizzarsi sulle lievi oscillazioni del battito cardiaco; in letteratura fenomeni simili sono classificati come distorsioni o artifacts.
+
+Mika Tarvainen propone \cite{TAR} un algoritmo di detrending basato su un unico parametro regolatore, studiato e implementato nel programma dal laureando. Il metodo è basato su un approccio definito {\em smoothness priors}.
+%
+		\subsubsection{Ipotesi}
+Il fenomeno al quale si vuole applicare il detrending è un processo stocastico costituito da una componente stazionaria almeno in senso debole e da una componente lineare che si vuole stimare perché venga sottratta al processo stesso. Sia \mymath{z(t)} una realizzazione qualsiasi, è possibile scrivere \myeq{z(t)= z_{stat}(t)+z_{trend}(t)} e modellizzare \mymath{z_{trend}(t)} con un'osservazione lineare \myeq{z_{trend}(t) = H\mathbf{\theta} + \mathbf{v}} essendo \mymath{H} matrice di osservazione, \mymath{\mathbf{\theta}} un vettore di parametri di regressione e \mymath{\mathbf{v}} l'errore commesso.
+%
+		\subsubsection{Formalizzazione}
+Il passo seguente è determinare \mymath{\tilde{\theta}} tale che \mymath{H\tilde{\theta}} sia una buona stima del trend. Viene per questo utilizzata una variante dell'approssimazione ai minimi quadrati, definendo \myeq{\tilde{\theta_\lambda} \triangleq \arg \min_{\theta}\{ \|H\theta-z \|^2 + \lambda^2 \| D_d(H\theta)\|^2 \}}
+ove \mymath{\lambda} è il parametro di regolazione e \mymath{D_d} l'approssimazione discreta del d-esimo operatore differenziale. Si noti che questa è una modifica dei minimi quadrati dove \mymath{\lambda} permette di polarizzare la soluzione a piacere verso valori di \mymath{\|D_d(H\tilde{\theta})\|} infinitesimi. 
+
+Presa infine banalmente come osservazione la matrice identità, si dimostra che \myeq{\tilde{z}_{stat} = z - H\tilde{\theta_\lambda}=(I-(I+\lambda^2D_2^TD_2)^{-1})z } che pertanto ha valenza di forma chiusa per l'algoritmo di detrending.
+
+In figura \ref{fig:detr} sono mostrati gli output dell'algoritmo per tre segnali di test, costituiti da componenti armoniche e lineari. Il parametro \mymath{\lambda} vale \mymath{10^9}. Valori alti sono comuni, poiché polarizzano verso la soluzione teoricamente migliore.
+\singlefig{acquisizione/detrend/detr.png}{Output (linee tratteggiate) del detrending sui rispettivi input.}{12.0}{detr}
+%----------------------------------------------------
+	\subsection{Standardizzazione}
+Le serie delle differenze ottenute hanno come contenuto informativo principale il loro spettro frequenziale, ma è ancora presto per iniziarne un'analisi nel dominio delle trasformate. L'aver premesso questo però giustifica la normalizzazione delle tre serie, dal momento che l'informazione persa in questo passaggio (la media temporale e la norma) non inficiano la natura periodica delle stesse; in altri termini, non rimuovono contenuto frequenziale d'interesse.
+
+ Si noti che la standardizzazione è usata in modo improprio rispetto a quanto accennato nel capitolo ``Elementi di teoria'': presentata come trasformazione lineare su variabile casuale, viene qui nella fattispecie applicata a delle realizzazioni concrete di un processo stocastico. Si consideri semplicemente \mymath{\mu_{x(t)}} come la media temporale della realizzazione \mymath{x(t)}, e \mymath{\sigma_{x(t)}^2} come la norma L2 della stessa.
+%-----------------------------------------------------------------------------------------
+	\subsection{Ricerca di una base di segnali}
+L'analisi delle componenti indipendenti (ICA) brevemente esposta nella teoria è il contesto entro il quale si va a cercare una base di segnali per le tre serie delle differenze associate ai canali. L'approccio JADE (Joint Approximate Diagonalization of Eigenmatrices, equivalentemente approssimazione della diagonalizzazione congiunta di automatrici) consiste nella ricerca di una base algebrica ortonormale che diagonalizzi quanto possibile ciascun elemento di un dato set di matrici quadrate (nel caso in esame, sarà un set di tre vettori rappresentanti le tre serie). L'ottimizzazione dei risultati ottenuti per via iterativa è basata su una variante dei minimi quadrati (si noti la varietà di utilizzi di questo metodo). Il metodo ipotizza che le serie temporali in input siano tutte a media nulla.
+
+Sia \mymath{X\in\mathbb{R}^{n\times T}} matrice nota e modellizzabile come \mymath{X = AS+N} dove \mylist{ \mymath{A\in\mathbb{R}^{n\times n}} è una matrice ignota e di rango pieno; \mymath{S\in\mathbb{R}^{n\times T}} ignota rappresentante i segnali sorgente e tale per cui \mylist{ \mymath{\forall t}, le componenti di \mymath{S(:,t)} sono statisticamente indipendenti; \mymath{\forall p}, le componenti di \mymath{S(p,:)} sono realizzazioni a media nulla di segnali sorgenti}; \mymath{N\in\mathbb{R}^{n\times T}} esprime l'incertezza come un rumore bianco e gaussiano.}
+Output della JADE sono le matrici \mymath{A} e \mymath{S} \cite{CARD}.
+%Siano \mymath{A_1,A_2,...,A_n} \mymath{n} matrici \mymath{\in\mathbb{R}^{m \times m}}, si vuole determinare \mymath{V\in\mathbb{R}^{m \times m}} tale che \mymath{\|V\|=1} e che \myeq{D_1=V^TA_1V\; , D_2=V^TA_2V\; , D_n=V^TA_nV} siano matrici diagonali qualora le matrici \mymath{A} siano esattamente {\em congiuntamente diagonalizzabili}.
+%\mymath{V} rappresenta allora una sorta di "autospazio medio" delle matrici originali \cite{CARD}.
+
+L'algoritmo si basa su una modifica del metodo di Jacobi dove il test d'arresto è sulla rotazione degli angoli Givens, per i quali si rimanda a \cite{GIV}. Nelle figure \ref{fig:ica1}, \ref{fig:ica2} e \ref{fig:ica3} è possibile vedere un esempio di applicazione dell'ICA.
+\singlefig{acquisizione/jadeR/sources.png}{Una sorgente armonica, una tipo PAM e una di rumore.}{9.0}{ica1}
+\singlefig{acquisizione/jadeR/mixtures.png}{Combinazioni lineari casuali delle sorgenti in figura \ref{fig:ica1}.}{9.0}{ica2}
+\singlefig{acquisizione/jadeR/outputs.png}{Output del JADE algorithm.}{9.0}{ica3}
+Come già detto, si nota che l'ordine delle sequenze è stato perso e non è più possibile associarvi biunivocamente i tre colori. E' ora quindi possibile determinare criteri per proseguire con una sola sequenza (ad esempio quella con la più promettente densità spettrale di potenza) o proseguire semplicemente con le tre sequenze, che d'ora in avanti non interagiscono più in alcun modo. Si è optato per tale scelta.
+%----------------------------------------------------
+	\subsection{Filtraggio frequenziale}
+E' necessario ora applicare un rifinimento delle basi, per eliminare buona parte del rumore. Sebbene si sia rigorosamente seguito l'ordine proposto in \cite{POH11}, si ritiene altrettanto valido (se non migliore) effettuare questa operazione anteriormente alla fase ICA.  La frequenza d'interesse è con buona certezza compresa tra i 0.9 e i 1.8 Hertz (corrispondenti al range 54-110 bpm), pertanto durante questa operazione è necessario assicurarsi che non siano tagliate le componenti armoniche sotto i 1.8 Hertz.
+		\subsubsection{Low-pass media mobile} %~
+Il media mobile (MA) a \mymath{N} punti è uno dei classici filtri FIR più usati per abbattere il contenuto ad alta frequenza di un segnale. Si è scelto un MA a cinque punti: nelle figure è possibile vederne le caratteristiche.
+\singlefig{acquisizione/filtraggio/ma-h.png}{Risposta all'impulso del MA.}{7.5}{ma-h}
+\singlefig{acquisizione/filtraggio/ma-mod.png}{Modulo della risposta in frequenza del MA.}{7.5}{ma-mod}
+\singlefig{acquisizione/filtraggio/ma-angle.png}{Fase della risposta in frequenza del MA.}{7.5}{ma-ang}
+Considerata la natura numerica delle sequenze, occorre trasformare linearmente la frequenza di taglio del media mobile numerico in una frequenza analogica. Supposto di aver rispettato la frequenza di Nyquist (si riveda la sezione di elaborazione numerica del capitolo 2) è possibile leggere dai grafici della risposta in frequenza del MA che tutte le frequenze analogiche tra 0 e \mymath{\frac{f_c}{2 \cdot N}} saranno schiacciate sul primo campione e perciò verranno preservate; le altre saranno annullate. Lo spettro di fase suggerisce un ritardo introdotto dal filtraggio, che non è qui rilevante. Si ricorda dalla teoria che il filtraggio in media mobile è raffinabile aggiungendo zeri al termine del rettangolo \mymath{h(n)} e trasformando con più punti. In ultima analisi quindi, supponendo una \mymath{f_c} = 20 Hz, si preservano giustappunto le frequenze fino a 2 Hz.
+		\subsubsection{Band-pass a finestra di Hamming} %---
+L'analisi prosegue addolcendo ulteriormente le sequenze nella ricerca delle sole frequenze d'interesse. Un filtro FIR comunemente usato come passabanda (BP) è la finestra di Hamming, per i suoi accettabili valori di ripple (oscillazioni in banda passante/oscura, rappresentazione numerica dei fenomeni di Gibbs). Si è scelta una finestra a 128 punti: nelle figure è possibile vederne le caratteristiche.
+\singlefig{acquisizione/filtraggio/hm-h.png}{Risposta all'impulso del BP.}{7.5}{hm-h}
+\singlefig{acquisizione/filtraggio/hm-mod.png}{Modulo della risposta in frequenza del BP.}{7.5}{bp-mod}
+\singlefig{acquisizione/filtraggio/hm-angle.png}{Fase della risposta in frequenza del BP.}{7.5}{bp-ang}
+%----------------------------------------------------
+	\subsection{Interpolazione con spline cubica}
+L'ultima fase per quanto concerne la rifinitura dei segnali è un'interpolazione di tipo spline cubico. Alternativamente a questa tecnica e come già emerso nelle considerazioni teoriche, è possibile aggiungere degli zeri al termine delle serie temporali e poi trasformarle secondo DFT. Scopo dell'interpolazione in \cite{POH11} è l'ottenimento di un confronto diretto con l'output di un sensore da dito per il BVP, testato e approvato da enti di competenza, cioè della ``strumentazione dedicata''. La frequenza scelta per l'interpolazione, \mymath{256} Hz, è appunto la medesima del suddetto sensore. Sebbene nell'elaborato questo confronto non sia stato svolto, sarà fattibile (e adattabile ad altre frequenze) in futuri utilizzi.
+%-----------------------------------------------------------------------------------------
+\section{Analisi spettrale} % ANALISI SPETTRALE
+	\subsection{Trasformata FFT dei segnali}
+Ciascuna delle tre serie di \mymath{N} dati è finalmente trasformata tramite FFT a \mymath{N} punti. Considerata la natura a valori in \mymath{\mathbb{R}} delle serie, essendo interessati al solo modulo degli spettri, metà di ogni FFT rappresenta adeguatamente tutta l'informazione. 
+Dalla Teoria dei Segnali si ha infatti \cite{TDS:LEO}
+\myeq{x^*(t)\longleftrightarrow X^*(-f)} e quindi in questo caso \myeq{X(f) = X^*(-f)}
+%----------------------------------------------------
+	\subsection{Ricerca dei picchi}
+Si ha ora tutta l'informazione necessaria ad individuare la traccia del battito cardiaco sulla registrazione della videocamera. I maggiori e più nefasti artifacts sono stati filtrati o rimossi, quindi ci si aspetta che la componente spettrale più grande in modulo corrisponda alla frequenza con cui il sangue circola nel corpo e alla quale per principio di causalità il cuore lavora. A livello operativo, quindi, è sufficiente individuare le ascisse di tre sequenze per le quali le ordinate sono massime globalmente. Le tre frequenze stimate per l'HR si ottengono banalmente moltiplicando tali ascisse per 256\, Hz \mymath{\cdot} 60\, s (la frequenza dei segnali interpolati per i secondi in un minuto).

@@ -1,0 +1,31 @@
+created HRsolution with project HRestimate_v0.3
+
+this is intended to MANUALLY link opencv 2.4.2
+
+follow http://stackoverflow.com/questions/7011238/opencv-2-3-c-visual-studio-2010/7014918#7014918
+
+putted dlls
+		opencv_core242       from  C:\Users\patrizio\Desktop\opencv_2.4.2_vs10\build\x86\vc10\bin
+		opencv_highgui242
+		tbb                  from  C:\Users\patrizio\Desktop\opencv_2.4.2_vs10\build\common\tbb\ia32\vc10
+		libfftw3-3           from  C:\Users\patrizio\Desktop\fftw-3.3.2-dll32
+		libfftw3f-3
+		libfftw3l-3
+
+		
+into C:\Users\patrizio\Documents\Visual Studio 2010\Projects\HRSolution\Debug
+
+--------------------------------------------------------------------Include Directories
+ C:\Users\patrizio\Desktop\fftw-3.3.2-dll32 
+ C:\Users\patrizio\Desktop\Matlab_Portable\R2010b\extern\include
+
+--------------------------------------------------------------------Library Directories
+add C:\Users\patrizio\Desktop\fftw-3.3.2-dll32\generated_libs 
+ 
+
+--------------------------------------------------------------------Linker Inputs
+opencv_core242.lib
+opencv_highgui242.lib
+libfftw3-3.lib
+libfftw3f-3.lib
+libfftw3l-3.lib

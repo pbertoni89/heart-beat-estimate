@@ -1,0 +1,452 @@
+@charset "utf-8";
+/* version no. [v.2012.08.29.01.xml_display.css] 01:33 PM break-all removed */
+/* version no. [v.2012.08.27.01.xml_display.css] 04:25 PM break-all */
+/* version no. [v.2012.07.29.01.xml_display.css] 10:35 AM bottom space */
+/* version no. [v.2012.04.26.01.xml_display.css] 12:41 PM Ref. .notes .disp */
+/* version no. [v.2012.03.15.01.xml_display.css] 11:40 AM Ref. .sep */
+
+/* for SVG fonts 28.09.2010 -- start --*/
+@font-face {
+ font-family: 'XITSMath';
+ src: url('/fonts/xitsmath.ttf');
+ /*src: local("?"), url('/fonts/xitsmath.ttf') format('truetype');*/
+}
+/* Safari */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+@font-face {
+ font-family: 'XITSMath';
+ src:url('http://files.hindawi.com.s3.amazonaws.com/fonts/xitsmath.svg#xitsmath') format('svg');
+}
+}
+/* Opera */
+@media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
+@font-face {
+ font-family: 'XITSMath';
+ src:url("http://files.hindawi.com.s3.amazonaws.com/fonts/xitsmath.ttf");
+}
+}
+
+/*-- end -- */
+
+
+#container .xml-content p {
+	text-align: justify;
+}
+/*#container .xml-content p a {
+word-break: break-all;
+}*/
+.middle_content .secapp { /* check if orphaned */ /* not orphaned for two h4 */
+	border-bottom-width: 0px;
+	margin: 24px 0px -12px;/*2em 0px -1em*/
+}
+.xml-content h5, #container .xml-content h6 {
+	font-family: Verdana;
+	text-align: left;
+	padding: 0px;
+	margin: 0px 0px 12px 0px;/*0em 0em 1em 0em*/
+	color: #999999;
+	font-size: 13px;
+	font-weight: bold;
+}
+.xml-content .fig {
+	border: 1px solid #CCCCCC;
+	background: #F5F5F5;
+	display: inline-block; /* block */
+	padding: 12px; /* 12px Paul 03.08.2010 */
+	margin: 6px 0px 6px 0px; /*1.5em 0em*/ /* 18px 0px */
+ 	*margin: 12px 0px; /* for IE */
+	font-size: 13px;
+	width:676px; /* 640px Paul 03.08.2010 */
+ 	/**width:auto;*/
+	width: /*\**/:676px\9;
+
+}
+.xml-content .fig + h5, #container .xml-content .fig + h6 {
+	margin: 18px 0px 12px 0px; /*1.5em 0em*/ /* 18px 0px */
+}
+.statement-content {
+	font-style: normal;
+}
+
+.thumbnail {
+	display: block;
+	border: 1px solid #CCCCCC;
+	background: #FFFFFF;
+	padding: 0px;
+	line-height:0px;
+	width:100px;
+}
+.xml-content .fig tr {
+	vertical-align: top;
+}
+.xml-content .fig img {
+	margin: 0px;
+	padding: 0px;
+	border-width: 0px;
+	display:inline;
+}
+.xml-content img {
+	margin: 0px 0px 0px 0px;/*0.3em 0 0.3em 0*//*4px 0px 4px 0px*/
+}
+.xml-content .fn-content { /* orphaned */
+	font-size:13px;
+	text-align:justify;
+}
+.xml-content .abbr-def {
+	display:block;
+}
+.xml-content .def {
+	display:block;
+	float:left;
+}
+.xml-content hr {
+	height:1px;
+	color:#CCCCCC;
+	background-color:#CCCCCC;
+	border-top: 0px solid #CCCCCC;
+	border-right: 0px solid #CCCCCC;
+	border-bottom: 0px solid #CCCCCC;
+	border-left: 0px solid #CCCCCC;
+	margin:24px 0px;/*2em 0em*/
+ #margin: 0px;/*0em*/
+}
+.equation {
+	text-align: center;
+	display: block;
+	vertical-align: middle;
+	position: relative;
+	width: 100%;
+}
+.equation-line {
+	text-align: center;
+	display: block;
+	vertical-align: middle;
+	margin: 12px 0px;/*1em 0*/
+	position: relative;
+	width: 100%;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.inlineformula {
+ top:3px;
+ position:relative;
+}
+}
+.equation-label {
+	position: absolute;
+	bottom:45%;
+	right: 0px;
+ #right: 3px;
+	float:right;
+	font-style: normal;
+}
+.figgroupcaption {
+	float:left;
+}
+.groupcaption {
+	/*float:right;*/
+	/*#width:84%;*/
+	text-align:justify;
+	margin-left:114px;
+	_margin-left:111px;
+	margin-top:-3px;
+/* #margin-top:-2px;*/
+}
+.figcaptiongroup {
+	background-color: #0099CC;
+}
+.figcaptiongroup a {
+	border: 1px solid #FF0000;
+	display:block;
+}
+.figcaptiongroup a img {
+	border: none;
+}
+.xml-content math, .math {
+	font-family: "Verdana", Arial, Helvetica, sans-serif;
+}
+.xml-content mtable {
+	font-size:100%;
+}
+.xml-content mfrac, msqrt {
+	font-size:100%;
+}
+mstyle[displaystyle="true"] mo {
+	font-family:"Times New Roman", Times, serif;
+	font-size:15px;
+}
+mstyle[mathvariant="bold"] mi, mi[mathvariant="bold"], mstyle[mathvariant="bold"] mo, mstyle[mathvariant="bold"] mn {
+	font-weight:bold;
+	font-style:normal;
+	font-size:13px;
+}
+mstyle[mathvariant="monospace"] mi {
+	font-style: normal;
+}
+mstyle[mathvariant="bold-italic"] mi, mstyle[mathvariant="italic"] mo {
+	font-weight:bold;
+	font-style:italic;
+	font-size:13px;
+}
+mi[mathvariant="bold-italic"] {
+	font-weight:bold;
+	font-style:normal;
+	font-size:13px;
+}
+mstyle[mathvariant="normal"] mi, mstyle[mathvariant="normal"] mrow mi {
+	font-style:normal;
+}
+munderover mrow mtable mtr mtd mrow {
+	margin-bottom:-2em;/*unknown font size*/
+}
+.xml-content .fig b, .xml-content .fig td {
+	font-size: 13px;
+}
+.xml-content .ref-item {
+	margin: 0px;
+}
+/* Size of Operator*/
+mo[minsize="1em"] {
+	font-size:17px
+}
+mo[minsize="1.5em"] {
+	font-size:21px
+}
+mo[minsize="1.75em"] {
+	font-size:23px;
+}
+/* ---  New List CSS --- */
+.xml-content .list, .list {
+/*	display:table;
+ 	*display:block;
+	margin-top:12px;
+	margin-left:24px;
+	text-align:justify;
+	position:relative;
+	#width:594px;
+	_width:590px;
+	*left:0px;
+*/
+display: table;
+margin-top: 12px;
+margin-bottom: 0px;
+position: relative;
+text-align: justify;
+
+	#width:594px;
+	_width:590px;
+	*left:0px;
+*display:block;
+}
+
+.xml-content .list .list, .list .list {
+	/*margin-left:0px;
+ #margin-left:18px;
+	width:100%;*/
+display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+position: relative;
+text-align: justify;
+
+	#margin-left:18px;
+	#width:573px;
+	_width:573px;
+}
+.xml-content .list .list .list, .list .list .list {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.xml-content .list-item, .list-item {
+	display: table-row;
+ *display:block;
+}
+.xml-content .list-label, .list-label {
+/*	display:table-cell;
+ *display:inline-block;
+	vertical-align:top;
+	font-style: normal;
+	padding-right:6px;
+	width:4%;
+	white-space:nowrap;
+*/
+ *display:inline-block;
+ *white-space:nowrap;
+
+display: table-cell;
+font-style: normal;
+padding-left: 24px;
+padding-right: 6px;
+vertical-align: top;
+white-space: nowrap;
+width: 4%;
+}
+.xml-content .list-content, .list-content {
+display: table-cell;
+position: relative;
+vertical-align: top;
+ *display:inline;
+}
+.xml-content .list-content .equation-line {
+	margin: 8px 0px;/*0.7em 0*/
+	float: left;
+}
+/* ---  End --- */
+.xml-content .statement {
+	display:block;
+	margin-top:10px;
+}
+.xml-content .statement br {
+	margin-bottom:10px;
+}
+.xml-content h4 img, .xml-content h5 img {
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+}
+.xml-content .smallmatrix mtr mtd {
+	line-height:.5pt;
+	font-size:9.5px;
+	padding: 0px 0px 0px 0px;
+}
+.sub mtr mtd {
+	font-size:9.5px;
+	line-height:0.5pt;
+	padding: 0px 0px 0px 0px;
+}
+.gloss-abbr td {
+	vertical-align:top;
+}
+.gloss-abbr tr td:first-child {
+	vertical-align:top;
+/*	width:10%; mpe/2010/805195 gloss-abbr Nomenclature */
+	max-width:10%;
+	padding-right: 3px;
+}
+/* Duplicated
+#container .fig img {
+	display:inline;
+}
+*/
+.double-underline {
+	border-bottom:double;
+}
+table.gloss-abbr {
+	font-size:13px !important;
+}
+.xml-content math munder mrow:last-child {
+	font-size:11px
+}
+.xml-content ol {
+	margin-bottom:0px;
+	padding-left: 45px;
+}
+/*.xml-content ol, .xml-content ol li:last-child {
+	margin-bottom:0px;
+}*/
+.xml-content ol li {
+	text-align:justify;
+}
+span.sep {
+    color: #000000;
+    display: inline;
+    float: none;
+    font-size: 13px;
+    font-weight: normal;
+    height: 15px;
+    margin-top: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: top;
+    width: auto;
+}
+/* for SVG fonts 28.09.2010 -- start --*/
+svg text {
+	font-family:'XITSMath';
+	font-style:normal;
+}
+.symbol {
+	font-family:Verdana;
+}
+h4 svg, h5 svg, h6 svg {
+	fill:#999999;
+}
+.displayed-label {
+	display: block;
+	margin:12px 0px;
+}
+ol.ref-list li.ref-item .displayed-label {
+	margin-left:-40px;
+}
+ol.notes .displayed-label {
+	margin-left: -44px;
+}
+.list-content .displayed-label {
+	/*margin-left:-48px;*/
+	margin-left: -60px;
+}
+.list-content .list-content .displayed-label {
+	margin-left:-108px;/*-170px 06.09.2011 301205 not done */
+}
+.list-content .list-content .list-content .displayed-label {
+	margin-left:-184px;
+}
+.svg-td {
+	white-space: nowrap; 
+	display: inline-block;
+}
+/*.fig-group-caption .svg-td , .table-group-caption .svg-td , .table-fn .svg-td {
+	white-space: nowrap; 
+	display: inline-block;
+}*/
+.displayed-label svg {
+    /*float: right;
+    margin-bottom: 12px;*/
+}
+.list .displayed-label svg {
+float: right;
+margin-bottom: 12px;
+}
+blockquote {
+	margin:0 36px;
+}
+ul.noliststyle li{
+	margin:0px;
+	padding-bottom:0px;
+	padding-left: 12px;
+	list-style-type: none;
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	background-position: 0 0px;
+	background-image:none;
+	background-color:transparent;
+	list-style-image:none;
+	list-style:none;
+}
+/* -- end -- */
+/* History */
+/* version no. [v.2012.01.05.01.xml_display.css] 03:59 PM list */
+/* version no. [v.2011.01.04.01.xml_display.css] 09:38 AM ie6,7 list */
+/* version no. [v.2011.06.13.01.xml_display.css] 09:38 AM fonts */
+/* version no. [v.2011.06.09.02.xml_display.css] 03:43 PM -170px 301205 not done */
+/* version no. [v.2011.06.09.01.xml_display.css] 09:47 AM blockquote */
+/* version no. [v.2011.05.26.01.xml_display.css] 10:57 AM like ISRN-980px layout for beta.hindawi.com new fonts for Gad */
+/* version no. [v.2011.05.24.01.xml_display.css] 12:13 PM like ISRN-980px layout for beta.hindawi.com */
+/* version no. [v.2011.04.27.01.xml_display.css] 3:27 PM for 4_nested list mpe/2011/374390/ */
+/* version no. [v.2011.01.10.01.xml_display.css] 9:54 AM for .fig ie8 */
+/* version no. [v.2010.12.23.01.xml_display.css] 11:42 AM for .svg-td */
+/* version no. [v.2010.12.20.02.xml_display.css] 10:56 AM for .table-fn .svg-td */
+/* version no. [v.2010.12.20.01.xml_display.css] 09:55 AM for .list and nested list asp/2010/287215 + jam/2010/976529 */
+/* version no. [v.2010.12.19.02.xml_display.css] 01:51 PM for .table-group-caption .svg-td */
+/* version no. [v.2010.12.19.01.xml_display.css] 11:00 AM for .fig-group-caption .svg-td */
+/* version no. [v.2010.12.15.01.xml_display.css] 03:46 PM for disp. svg float for labels bvp/2010/584521 + .list width for IE7 */
+/* version no. [v.2010.12.12.02.xml_display.css] 02:24 PM for td all disp. svg float for labels  */
+/* version no. [v.2010.12.12.01.xml_display.css] 11:30 AM for td svg width gloss-abbr Nomenclature  */
+/* version no. [v.2010.12.02.01.xml_display.css] 03:09 PM for list mpe/2010/805195 gloss-abbr Nomenclature  */
+/* version no. [v.2010.12.01.01.xml_display.css] 11:35 AM for list ahep/2010/297916 disp. inside endnotes(ref-list) & .symbol Verdana */
+/* version no. [v.2010.11.25.01.xml_display.css] 04:16 PM for list aai/2010/832542 */
+/* version no. [v.2010.11.24.01.xml_display.css] 03:46 PM for .symbol */
+/* version no. [v.2010.11.14.01.xml_display.css] 11:30 PM for SVG inside list list & .list-label width */
+/* version no. [v.2010.11.10.01.xml_display.css] 02:20 PM for inline Math img margin removed */
+/* version no. [v.2010.10.11.01.xml_display.css] 09:00 AM for SVG h6 */
+/* version no. [v.2010.10.05.01.xml_display.css] 03:12 PM for SVG labels */

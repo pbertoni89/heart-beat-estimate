@@ -1,0 +1,83 @@
+\ProvidesPackage{patlib}
+
+\newcommand{\mymath}[1]
+	{\begin{math}
+		#1
+	\end{math}}
+%
+\newcommand{\myeq}[1]
+	{\begin{equation}
+		#1
+	\end{equation}}
+%%%
+\newcommand{\singlefig}[4]
+	{\begin{figure}[H] 
+	 	\begin{center}
+			 \begin{tabular}{c @{\hspace{1em}} c}	
+				 \includegraphics[width = #3 cm]{figure/#1}
+				 %\captionsetup{singlelinecheck=off}
+			      %\caption[.]{#2}
+			 \end{tabular}
+		 \end{center}
+	 \caption{#2} 
+	 \label{fig:#4}
+ 	\end{figure}}
+%%%%% SISTEMARE
+\newcommand{\doublefig}[4]
+	{\begin{figure}[tbpa] 
+		\begin{center}
+			\begin{tabular}{c @{\hspace{1em}} c}
+				\includegraphics[width=0.3cm]{figure/#1} & \\
+				\includegraphics[width=0.3cm]{figure/#3} &
+				(a) & (b)
+			\end{tabular}
+		\end{center}
+		\caption{Esempio carino. (a) #2 (b) #4} 
+	\label{fig:example-carino}
+	\end{figure}}
+%%%%%%%
+\newcommand{\triplefig}[7] % fig1path, fig1cap, fig2path, fig2cap, fig3..., label
+	{\begin{figure}[h]
+		\begin{center}
+			\begin{table}[tbhp]
+			\begin{tabular}{c @{\hspace{1em}} c}
+	\includegraphics[\linewidth]{figure/#1} \\
+	\includegraphics[\linewidth]{figure/#3} \\
+	\includegraphics[\linewidth]{figure/#5}
+			\end{tabular}
+			\end{table}
+		\end{center}
+		\caption{(a) #2 (b) #4 (c) #6}
+	\label{fig:#7}
+	\end{figure}}
+%%%
+\newcommand{\mytriple}[9]{
+\begin{figure}[H] % htp !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\centering
+\subfloat[#2]
+	{\label{fig:#8:a}
+	{\\ \includegraphics[width = #9 cm]{figure/#1}}} \\
+\subfloat[#4]
+	{\label{fig:#8:b}
+	{\\ \includegraphics[width = #9 cm]{figure/#3}}} \\
+\subfloat[#6]
+	{\label{fig:#8:c}
+	{\\ \includegraphics[width = #9 cm]{figure/#5}}} \\
+\caption{#7}
+\label{fig:#8}
+\end{figure}}
+%%%
+\newcommand{\rtm}
+{ \textsuperscript{\textregistered} }
+%%%
+\NewDocumentCommand\mylist{>{\SplitList{;}}m}
+  {\begin{itemize}
+      \ProcessList{#1}{\insertitem}
+   \end{itemize}}
+%
+%implementare nel futuro mysys che prende una lista e costruisce un sys math
+\newcommand\insertitem[1]{\item #1}
+%%%
+\newcommand\comm[1]{\begin{comment}#1\end{comment}}
+%%%
+\newcommand\mathbi[1]{\textbf{\em #1}}

@@ -1,0 +1,23 @@
+.xml-content mn, .xml-content mo, .xml-content mtext, .xml-content mi, .xml-content mfrac, .xml-content mtable, .xml-content msqrt{
+font-size:10px;}
+#left_column {
+	display:none;
+	}
+.right_column {
+	display:none;
+}
+#journal_navigation {
+	display:none;
+}
+.search_container 
+{
+	display:none;
+}
+.hindawi_links ul
+{
+	display:none;
+	}
+#container .middle_content
+{
+	padding:0px;
+}

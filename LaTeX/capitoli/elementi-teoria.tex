@@ -1,0 +1,102 @@
+\section{Fotopletismografia}	% PPG
+La fotopletismografia (photopletysmography in seguito riferita, per brevità, con l'acronimo inglese {\em PPG}) è una tecnica non invasiva per ricavare la pulsazione del volume sanguigno (Blood Volume Pulse, {\em BVP}). Durante il ciclo cardiaco, variazioni volumetriche dei vasi sanguigni modificano le lunghezze d'onda della luce rifratta dai tessuti, in modo che le consecutive variazioni temporali dell'intensità luminosa riflessa dall'epiderma possano fornire informazioni sui periodi del ciclo. L'inverso del periodo tra un battito e l'altro, moltiplicato per 60 secondi, è definito come {\em heart rate}.
+
+Sebbene la PPG necessiti tradizionalmente di sorgenti luminose infrarosse, Verkruysse \cite{VER08} ha mostrato che le misure degli impulsi sul viso umano sono ottenibili in normali condizioni ambientali, qualora siano sufficientemente irradiate dal sole, da incandescenza o addirittura da una potente sorgente LED.
+%-----------------------------------------------------------------------------------------
+	\section{Sistemi dinamici LTI SISO} % SISTEMI
+Moltissimi sistemi fisici possono essere più o meno fedelmente modellizzati come sistemi {\em dinamici} (ovvero dove l'evoluzione dello stato dipende dallo stato stesso), {\em lineari} (dove vale il principio di sovrapposizione degli effetti), {\em tempo-invarianti} o {\em stazionari} (ovvero il cui comportamento in un lasso temporale finito è indipendente dal tempo d'inizio dello svolgimento del processo, a parità di tutte le altre condizioni). Infine è possibile definire  sistemi {\em a singola entrata} (input) e coerentemente {\em a singola uscita} (output).
+Questi sistemi d'ora in avanti saranno per brevità riferiti come sistemi LTI SISO, o semplicemente LTI.
+%-------------------------------------------------------
+	\subsection{Convoluzione}  % CONVOLUZIONE
+La convoluzione è un'operazione matematica commutativa tra due funzioni integrabili avente come prodotto una terza funzione che esprime la conseguenza dell'interazione tra i due operandi, in un periodo storico o rispetto a qualche altra dimensione significativa per il sistema \cite{WIKI}. Nel contesto dei sistemi LTI SISO, definito \mymath{x(t)} il segnale in ingresso al sistema e \mymath{h(t)} la risposta del medesimo all'impulso di Dirac \mymath{\delta(t)}, si ha che l'uscita \mymath{y(t)} è la convoluzione tra \mymath{x(t)} e \mymath{h(t)}. A seconda della tipologia dei segnali in esame, si parlerà di convoluzione lineare o circolare.
+		\subsubsection{Lineare}
+La convoluzione lineare tra due funzioni che rispettano le ipotesi citate è scrivibile come 
+	\myeq{y(t)\triangleq x(t)\ast h(t)=\int_{\mathbb{R}}^{}\! x(\tau)h(t-\tau)\, d\tau = \int_{\mathbb{R}}^{} \! x(t-\tau)h(\tau)\, d\tau}
+		\subsubsection{Circolare}
+Data una funzione periodica di periodo \mymath{T}, la sua convoluzione con una funzione \mymath{h(t)} è ancora una funzione periodica ed è scrivibile come
+	\myeq{y(t)\triangleq x(t)\circledast h(t)=\int_{t_0}^{t_0+T}\!h_T(\tau)x(t-\tau)\,d\tau}
+essendo \mymath{h_T(t)} la sommazione periodica di \mymath{h(t)} definita come
+	\myeq{h_T(t)\triangleq \sum_{k\in \mathbb{Z}}^{}\!h(t-kT)}
+%-------------------------------------------------------
+	\subsection{Risposta in Frequenza} % FREQUENZA
+L'analisi frequenziale è una teoria chiave nello studio dei sistemi LTI SISO. L'argomento è vastissimo e ne verrà ora presentata traccia dei concetti fondamentali.
+L'idea di `risposta' coincide con il determinare, se esiste, una relazione chiusa tra ingresso e uscita di un sistema LTI. I vantaggi sono portentosi: equazioni integrodifferenziali ottengono una rappresentazione algebrica in un altro dominio matematico, detto `delle trasformate'.  La grande limitazione che essa impone è però di prescindere dallo stato attuale, determinante (per definizione) nel concetto di `sistema dinamico'.
+Se da un lato l'analisi frequenziale permette di semplificare sensibilmente i modelli matematici che si andranno ad applicare, dall'altro la perdita di informazione sullo stato non permette di conoscere l'evoluzione dei sistemi durante i transitori, ma solo quando si è raggiunta una condizione di asintotica stabilità detta {\em di regime}. I problemi reali che non possono ignorare l'informazione di stato afferiscono prevalentemente all'area dell'Automatica e del Controllo; nel Digital Signal Processing lo studio nel dominio frequenziale è per fortuna spesso applicabile.
+%-------------------------------------------------------
+	\subsection{Trasformata di Fourier} % FOURIER
+Il principale strumento del quale si avvale l'analisi in frequenza di un segnale temporale è la sua trasformata integrale di Fourier (riferita, per brevità, equivalentemente col termine {\em spettro del segnale}), che può esser vista come un caso degenere della trasformata integrale di Laplace. Sia \mymath{x(t)} una funzione a decrescenza rapida definita su un sottoinsieme di \mymath{\mathbb{R}}, la sua F-trasformata \mymath{X(f)} è descritta come:
+\myeq{X(f)\triangleq \int_{\mathbb{R}}^{} \! x(t) e^{-\jmath 2 \pi f}\, dt}
+Essendo una funzione complessa, è possibile riferirvisi in termini di {\em spettro d'ampiezza} o {\em di modulo} e {\em spettro di fase}.
+		\subsubsection{Trasformata discreta}
+Sono qui riassunte le considerazioni principali da compiere nel passaggio da analogico a numerico, senza oberare il lettore con troppe formalizzazioni matematiche. Il fatto fondamentale che avviene trae origine dalla trasformata del pettine di Dirac: \myeq{\delta_T(t) \longleftrightarrow \frac{1}{T}\delta_{T^{-1}}(f)}
+e da una possibile espressione del teorema della risposta in frequenza: \myeq{x_1(t) \ast x_2(t) \longleftrightarrow X_1(f) X_2(f)}
+La verità congiunta dei predicati implica che un segnale campionato, quale può essere un segnale numerico (una {\em sequenza}) visto nel dominio analogico, sia associato a uno spettro periodico. La trasformata di Fourier {\em a tempo discreto} (DTFT) di una sequenza sarà quindi un segnale periodico.
+
+Se inoltre si vede la sequenza \mymath{x(n)}, che si ipotizza periodica a supporto finito, come fosse un periodo fondamentale di essa stessa, per dualità si avrà uno spettro periodico e campionato. Sono queste le basi della trasformata {\em discreta} di Fourier (DFT o FFT, a seconda di dettagli implementativi).
+%-----------------------------------------------------------------------------------------
+\section{Processi stocastici} % COMB
+	\subsection{Concetto di processo}
+Sia definito uno spazio di probabilità con \mymath{\Omega =\{ \omega_i\}} 
+spazio campione (finito o meno) degli eventi \mymath{\omega_i}, \mymath{S} una classe di eventi e \mymath{f(\cdot)} una legge di probabilità definita su \mymath{S}. Sia individuato un set di funzioni del tempo \mymath{x_i(t)} in numero pari ai risultati \mymath{\omega_i}. Un processo stocastico \mymath{X(t,\omega)} è una {\em corrispondenza} che associa a ciascun evento possibile una delle suddette funzioni, le quali prendono il nome di {\em realizzazioni} \cite{TDS:HILL}.
+E' possibile pensare un processo stocastico come una variabile casuale \mymath{X} che evolve nel tempo: come si nota in figura, il valore del processo in un generico istante \mymath{t_c} è il prodotto di un'estrazione da \mymath{X}.
+\singlefig{teoria/stocastici.png}{Tre realizzazioni casuali di un processo.}{9.0}{stoc}
+Si definisce la {\em stazionarietà} di un processo come l'invarianza nel tempo delle sue proprietà statistiche: si parla di stazionarietà {\em forte} quando in ogni istante possibile le densità di probabilità sono le medesime; {\em debole di ordine} 2 quando a preservarsi sono solo i momenti statistici fino al secondo ordine, ovvero media e varianza.
+Si definisce {\em ergodico} un processo \mymath{X(t,\omega)} tale per cui una sua singola realizzazione contiene sufficiente informazione per conoscere tutte le proprietà statistiche di \mymath{X(t,\omega)}. Le definizioni {\em forte} e {\em debole} ricalcano quelle viste per la stazionarietà. Si noti infine che l'ergodicità implica la stazionarietà.
+%-------------------------------------------------------
+	\subsection{Processi Gaussiani}
+I processi stocastici gaussiani hanno in ogni istante distribuzioni probabilistiche tipiche di una variabile aleatoria gaussiana. Sono spesso protagonisti nella scelta degli input per la modellizzazione e/o progettazione di sistemi di elaborazione, in quanto godono di proprietà e teoremi unici e significativi. Il teorema del limite centrale garantisce che la somma di un elevato numero di variabili casuali tende a disporsi come una variabile gaussiana, il che giustifica la possibile assunzione di gaussianità per molti processi. Un gaussiano se è stazionario lo è necessariamente in modo forte e debole, ed è completamente caratterizzato da media e varianza. Si scriverà quindi \mymath{X\sim N(\mu_X,\sigma_X^2)}.
+	\subsection{Standardizzazione}
+La standardizzazione, detta equivalentemente normalizzazione, è una trasformazione lineare che mappa una variabile casuale \mymath{X}  di media e varianza note \mymath{(\mu_X,\sigma_X^2)} in un'altra variabile casuale \mymath{Z} avente media nulla e varianza unitaria. E' particolarmente utile per le variabili gaussiane, in quanto consente di riferirsi a dei dati tabulati per conoscere i valori della funzione di ripartizione evitando il calcolo di integrali non elementari \cite{WIKI}. Si definisce pertanto la standardizzazione come \myeq{Z = \frac{X-\mu_X}{\sigma_X}}
+	\subsection{Rumore Bianco}
+I processi bianchi sono caratterizzati da un diagramma di densità interspettrale di potenza costante sull'asse delle frequenze, il che implica la totale ricchezza armonica delle loro realizzazioni. Per le proprietà fondamentali delle trasformate questo significa che godono di funzioni di autocorrelazione impulsive, perciò in ogni istante di tempo diverso da quello attuale il valore del processo è completamente scorrelato da quello che si ha per l'istante in esame.
+%-----------------------------------------------------------------------------------------
+\section{Elaborazione numerica dei segnali}	% SAMPLING
+	\subsection{Campionamento e aliasing}
+Il passaggio dall'informazione analogica a quella digitale non è senza inconvenienti: se da un lato è intuitivo che un insieme finito di dati sia meno rappresentativo di uno non finito (sebbene questo non sia sempre vero), nella pratica avviene effettivamente un fenomeno di bias, riducibile a piacere ma non eliminabile. Dai concetti base dell'analisi frequenziale infatti viene postulato quanto segue: \mylist{un qualsiasi segnale temporale a supporto finito, quali sono i segnali reali, ha necessariamente uno spettro a supporto infinito, e viceversa.; un qualsiasi segnale temporale campionato è dotato di spettro periodico nel dominio delle frequenze (come si è visto nella sezione ``Trasformata di Fourier'').}
+Il teorema fondamentale del campionamento (sampling) di Shannon-Nyquist fissa come frequenza minima di sampling \mymath{f_{\tilde{c}} \triangleq 2 f_N}, essendo \mymath{f_N} la frequenza più alta contenuta nel segnale d'interesse.
+Noto quindi che il prodotto nei tempi tra un pettine di Dirac e un segnale \mymath{x(t)} convolve in frequenza \mymath{X(f)} con un pettine di periodo inverso, appare chiara l'opportunità che questa operazione possa non rispettare la non sovrapposizione (e in tal caso creare degli alias) dello spettro stesso.
+\singlefig{teoria/aliasing.png}{(a) uno spettro d'ampiezza generico; (b) un sampling insufficiente con generazione di aliases; (c) un sampling che rispetta la frequenza di Shannon-Nyquist.}{8.0}{alias}
+%-------------------------------------------------------
+	\subsection{Interpolazione}
+Nell'analisi numerica son detti interpolanti quei metodi per individuare nuovi punti di uno spazio cartesiano sulla base di un set finito di punti conosciuti, sotto l'ipotesi che sia i primi che i secondi afferiscano a una stessa funzione \mymath{f(\mathbf{x})} non nota a priori \cite{WIKI}. E' possibile rilassare questa condizione molto stretta su \mymath{f(\mathbf{x})} ponendo criteri di somiglianza: questa tecnica, sebbene non propriamente interpolante, è detta {\em interpolazione statistica} o meglio {\em curva di regressione}.
+
+Applicazione principale dell'interpolazione è il raffinamento di dati di natura numerica, limitati per costruzione dal sampling (se provenienti da sensori) oppure dalla finitezza dei dispositivi di memoria principale/massa (se necessitano di storage), o chiaramente dalla combinazione delle due casistiche. I segnali più frequentemente interpolati sono serie storiche monodimensionali o immagini.
+
+Svariati metodi sono stati all'uopo sviluppati: polinomiale, armonico, razionale... Per brevità verrà rapidamente esposto il metodo spline cubico, essendo il solo effettivamente adoprato durante l'acquisizione del battito cardiaco. Per l'interpolazione statistica invece verrà presentato il metodo dei minimi quadrati ordinario (abbreviato con OLS dall'inglese).
+%-------------------------------------------------------
+		\subsubsection{Spline cubiche}
+Siano \mymath{\{(x_i,y_i)\in\mathbb{R}^2: \; f(x_i)=y_i \;\; i=0,...,n\}} \mymath{n+1} ~~punti noti, si vuole trovare \mymath{s_3:[x_0,x_n]\rightarrow \mathbb{R}} che interpoli e che sia \mylist{globalmente molto regolare: più che \mymath{C^2(x_0,x_n)}; localmente cubica: \mymath{s_3(x)\vert_{x_k,x_{k+1}} \in \mathbb{P}^3  \;\; k=0,...,n-1}}
+Pertanto su ogni intervallino i-esimo dovrà essere \myeq{s_3^{(i)}(x)= a_1^{(i)}x^3+a_2^{(i)}x^2+a_3^{(i)}x^1+a_4^{(i)}} La condizione sulla continuità invece impone \myeq{ \left\{ \begin{array}{rcl} \begin{aligned}
+			 	 s_3^{(i)}(x_i) = s_3^{(i-1)}(x_i) \\
+				(s_3^{(i)})^\prime(x_i) = (s_3^{(i-1)})^\prime(x_i) \\
+				(s_3^{(i)})^{\prime\prime}(x_i) = (s_3^{(i-1)})^{\prime\prime}(x_i) \\
+					\end{aligned} \end{array}\right. }
+\singlefig{teoria/spline.png}{Tre interpolazioni diverse di una stessa serie. Si può notare come la spline cubica sia immune da gravi discrepanze in alcuni punti, delle quali altri metodi ne sono affetti.}{9.0}{splin}
+		\subsubsection{Effetti frequenziali}
+L'interpolazione tramite spline di ordine dispari addolcisce il diagramma di densità interspettrale di potenza del segnale.
+La ragione di questo comportamento è che le trasformate di Fourier delle spline in questione divergono, introducendo un bias. Se si osservano nel dominio della trasformata Zeta (necessaria in ambito numerico) esse sono caratterizzate da poli esterni alla regione del cerchio unitario \cite{IEEE:SPLINE}.
+\singlefig{teoria/spline-on-psd.png}{Densità interspettrali di potenza per processi ottenuti interpolando rumore bianco a banda limitata.}{9.0}{stoc}
+%-------------------------------------------------------
+	\subsubsection{Minimi Quadrati Ordinari} % OLS
+Siano \mymath{\{(x_i,y_i)\in\mathbb{R}^2: \; f(x_i)=y_i \;\; i=0,...,n\}} \mymath{n+1} ~ punti noti, si vuole trovare \mymath{\tilde{f}(x)\in\mathbb{P}_m,\;\;  m\ll n} per cui \myeq{\sum_{i=0}^n{[\tilde{f}(x_i)-y_i]}^2 \leqslant \sum_{i=0}^n{[p_m(x_i)-y_i]}^2 \;\;\;\;\; \forall p_m \in \mathbb{P}_m} Un eloquente utilizzo del metodo, fissato \mymath{m=1} si può osservare in figura \singlefig{teoria/leastsquare.png}{La retta di regressione di una serie temporale.}{9.0}{leastsquare}
+Graficamente l'obiettivo è minimizzare la sommatoria dei quadrati delle distanze tratteggiate. Sarà data ora un'altra rappresentazione del criterio di ottimalità proprio della regressione OLS. Fissato il grado a 1 si ha infatti \mymath{p_1(x)=a_1x+a_2} che descrive la retta. Ora siano \mymath{\mathbf{x},\,\mathbf{y}} i vettori delle \mymath{x_i,\;y_i} rispettivamente ordinate. Sia \mymath{\mathbf{u}=[1,...,1]\in\mathbb{R}^{n+1}} il vettore unitario. 
+Il metodo OLS lineare impone \myeq{ \left\{ \begin{array}{rcl} \begin{aligned}
+			 	(\textbf{y}-a_1\textbf{x}-a_2\textbf{u})\textbf{x}=0 \\
+			 	(\textbf{y}-a_1\textbf{x}-a_2\textbf{u})\textbf{u}=0 \\
+				\end{aligned} \end{array}\right. }
+conseguentemente \mymath{\mathbf{y}-a_1\mathbf{x}-a_2\mathbf{u}} è ortogonale a \mymath{\mathbf{x}} e a \mymath{\mathbf{u}}, cioè al piano generato da questi vettori. In ultima analisi quindi \mymath{(a_1,a_2)} sono tali per cui \mymath{a_1\mathbf{x}+a_2\mathbf{u}} è la proiezione di \mymath{\mathbf{y}} sul suddetto piano. Si osserva che il piano è il luogo delle \mymath{\infty^2} soluzioni del sistema sovradeterminato posto dal problema: anche in questo senso macroscopico quindi la soluzione offerta da OLS è quella che minimizza la funzione obiettivo \cite{OLSFIT}. \singlefig{teoria/leastsquareplane.png}{Ortogonalità dei minimi quadrati.}{9.0}{leastsquareplane}
+%-------------------------------------------------------------
+\subsection{Differenze finite} % DIFFERENZE FINITE
+Il metodo delle differenze finite è un'approssimazione numerica utilizzata nell'ambito della risoluzione delle equazioni differenziali ordinarie (ordinary differential equations, ODE).
+L'idea che sta alla base è di sostituire alla derivata, concetto prettamente infinitesimale, il rapporto incrementale, essendo il limite del medesimo per costruzione pari alla derivata stessa. Sia \mymath{y(t)} una qualsiasi funzione derivabile, \mymath{h\in\mathbb{R}^+} si scriverà 
+\myeq{y\prime(t)\triangleq \lim_{h\to 0}\frac{y(t+h)-y(t)}{h} \backsimeq \frac{y(t+h)-y(t)}{h}}
+Il metodo delle differenze finite permette inoltre una snella analisi di convergenza, a costo di un errore d'approssimazione dell'ordine di \mymath{h}.
+%-----------------------------------------------------------------------------------------
+\section{Analisi delle componenti indipendenti} % ICA
+	\subsection{Motion artifacts}
+Nella registrazione di un video della regione facciale i sensori RGB prelevano una composizione del segnale fotopletismografico riflesso, insieme ad altre sorgenti di fluttuazione luminosa d’origine artificiale quali il movimento delle palpebre o gli scostamenti involontari del corpo, definiti {\em artifacts}.
+Siccome l’assorbività dell’emoglobina differisce tra gli intervalli visibile e invisibile dell’asse spettrale, ogni sensore di colore ha registrato una combinazione dei segnali originari con pesi leggermente differenti \cite{POH11}. Ciò che si cerca è quindi di isolare questi artifacts confinandone la causa in un sottoinsieme dell'informazione totale, ripartendo quest'ultima in qualche modo tra BVP e tutto il resto non desiderato.
+%-------------------------------------------------------
+	\subsection{Ricerca di una base}
+Scopo dell'ICA (Indipendent Component Analysis) è determinare una base di \mymath{N} funzioni quanto più linearmente indipendenti possibile \mymath{s_i(t) \;\; i=1,...,N} da un set di \mymath{N} funzioni \mymath{y_i(t) \;\; i=1,...,N} osservate, supposto che \myeq{\mathbf{y}(t) = A \: \mathbf{s}(t)} essendo \mymath{A\in \mathbb{R}^{N\times N}} la matrice di combinazione lineare delle basi. Il problema di stimare opportunamente \mymath{A} è un problema sovradeterminato che necessita di qualche criterio di ottimo per esser risolto. In questo caso, si cercheranno soluzioni (le basi) con la massima non-gaussianità possibile. Vista una generica \mymath{\mathbf{y}(t)} come combinazione lineare delle \mymath{\mathbf{s}(t)}, per il teorema del limite centrale della statistica \mymath{\mathbf{y}(t)} è necessariamente simile a una realizzazione di un processo gaussiano almeno quanto lo sia ciascuna delle sue basi. Per esempio, si pensi ad una combinazione lineare dei risultati di un numero elevato di dadi a sei facce. In questo contesto, avere basi non-gaussiane porta a una maggior indipendenza delle stesse. Nel caso limite in cui tutte le basi siano gaussiane, il risultato dell'ICA degenera e perde significato \cite{URL:ICA}.
+Si noti che l'applicazione dell'ICA produrrà le basi in un ordine indeterminato.

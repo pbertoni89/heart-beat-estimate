@@ -1,0 +1,159 @@
+@charset "utf-8";
+/* version no. [v.2012.08.28.01.hindawi.css] 04:04 PM li a svg color */
+/* version no. [v.2011.02.29.01.hindawi.css] 1:59 PM  .editors li */
+/* version no. [v.2011.09.22.01.hindawi.css] 3:47 PM  row */
+/* version no. [v.2011.06.14.01.hindawi.css] 3:47 PM  open-access */
+/* version no. [v.2011.06.13.01.hindawi.css] 1:37 PM  open-access */
+.search_advanced a:hover {
+	color: #00718F;
+}
+.search_button:hover {
+	background-color: #00718F;
+}
+.slogan {
+	margin:0 0 0 126px;
+}
+.hindawi_links {
+	background-color: #00718F;
+	background-image: url(../images/blue_end.png);
+	margin-left: 99px;
+}
+.hindawi_links a {
+	color: #C6D9D9;
+}
+#journal_navigation {
+	background-image: url(../images/navigation_bg.gif);
+}
+.journal_nav_links, .journal_nav_links:hover {
+    background-image: url(../images/navigation.png);
+}
+.green_strip, .top_strip {
+	background-color: #6DB33F;
+}
+.journal_icon {
+	background-image: url(../images/journal_icon.jpg);
+	color: #6DB33F;
+}
+.details_icon {
+	background-image: url(../images/details_icon.jpg);
+	color: #6DB33F;
+}
+.services_icon {
+	background-image: url(../images/services_icon.jpg);
+	color: #6DB33F;
+}
+.left_column_list li a {
+	background-image: url(../images/bullet.gif);
+}
+.left_column_list li :hover {
+	background-image: url(../images/bullet.gif);
+	background-color: #E8F4DF;
+}
+.special_issues li a {
+	background-image: url(../images/bullet.gif);
+}
+.special_issues li :hover {
+	background-image: url(../images/bullet.gif);
+	background-color: #E8F4DF;
+}
+.download_pdf a:hover {
+	border: 1px solid #96c094;
+}
+.middle_content a {
+	color: #418B34;
+}
+.middle_content a:hover {
+	background-color: #F0F9EC;
+}
+.feature_head {
+	color: #6DB33F;
+	border-bottom-color: #6DB33F;
+}
+.open_access a , .open_access a:hover {
+	background-image: url(../images/open_access.gif);
+}
+.volumns a {
+	background-image: url(../images/green_arrow.gif);
+}
+.volumns a:hover {
+	border-top-color: #DEEFD3;
+	border-right-color: #DEEFD3;
+	border-bottom-color: #DEEFD3;
+	border-left-color: #7EBD59;
+}
+.cell_width_no {
+	background-image: url(../images/green_arrow.gif);
+}
+.board_links a {
+	color: #418B34;
+}
+.middle_content ul li {
+	background-image:url(../images/green_arrow.gif);
+}
+#container .browse_area li {
+	background-image: url(../images/green_arrow.gif);
+}
+#article_list li a:hover {
+	color: #418B34;
+}
+.last_link {
+	background-image: url(../images/last_link_2.png);
+}
+.last_link:hover {
+	background-image: url(../images/last_link_2.png);
+}
+.affiliations_head {
+	color: #418B34;
+}
+.subscription_table_head {
+	background-color: #AFDA96;
+	color: #296F2B;
+}
+.subscription_table_plus , .row {
+	background-color: #F0F9EC;
+}
+.conference {
+	color: #418B34;
+}
+.retract {
+	border: thick solid #6DB33F;
+}
+.submissions a {
+	color: #418B34;
+}
+.author_comment_name a:hover {
+	color: #418B34;
+}
+.sub_cat {
+	background: url(../images/green_arrow.gif) no-repeat left;
+}
+.submission_steps {
+	color: #FFFFFF;
+}
+.subject {
+	background: url(../images/green_arrow.gif) no-repeat left;
+}
+.right_column .cc a {
+	color: #418B34;
+}
+.xml-content .thumbnail:hover {
+	border: 1px solid #6DB33F;
+}
+.logo img {
+	width:75px;
+}
+#content .middle_content ul.editors li a {
+	line-height: 22px !important;
+	color: #418B34;
+}
+body.warning_1 div#container{background:url("../images/warning_1.gif") repeat-y scroll center 200px #FFFFFF}
+body.warning_1 div#container .right_column_actions{background-color: transparent;}
+body.warning_1 div#container #article_list li a:hover{background-color:transparent}
+.middle_content ul li a svg {
+	fill: #418B34;
+}
+/* version no. [v.2010.05.12.01.hindawi.css] 1:37 PM  last link img PNG for beta and .logo img 75px */
+/* version no. [v.2010.09.21.01.hindawi.css] 1:37 PM  last link img PNG for beta and .logo img 75px */
+/* version no. [v.2010.09.16.01.hindawi.css] 1:12 PM  last link img PNG for beta */
+/* version no. [v.2010.08.31.01.hindawi.css] 1:12 PM  beta1 for online */
+/* version no. [v.2010.02.28.01.hindawi.css] 12:00 PM */

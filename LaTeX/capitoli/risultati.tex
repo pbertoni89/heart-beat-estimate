@@ -1,0 +1,33 @@
+\section{Legenda e intepretazione}
+Vengono ora presentate due serie di outputs che l'utente riceve dopo un'acquisizione video.
+Entrambe sono state ottenute retroilluminando un dito con un forte LED e poggiandoci delicatamente la webcamera dall'altro lato. La risoluzione per entrambe è di 1280x720 pixel.
+
+Il primo grafico, denominato {\em RR}, mostra le serie di differenze ottenute dai tre canali nelle modalità descritte nel capitolo 2. L'asse dei tempi (in questo e nei prossimi plots) è ottenuto a partire dal fps medio calcolato ad ogni ciclo di processing: senza un tracciamento del fps infatti non è possibile risalire all'effettiva velocità dello streaming e per causalità a quella della pulsazione cardiaca.
+
+Il secondo grafico riporta in nero tratteggiato le serie del primo e sopra vi mostra l'effetto della standardizzazione.
+
+Nel terzo grafico è possibile vedere in nero il prodotto dell'analisi delle componenti indipendenti ICA: si noti la perdita di ordinamento (cioè di colore) che subiscono le serie. In rosso invece è rappresentato l'effetto del filtraggio composito (MA + BP).
+
+Il quarto grafico mostra in blu tratteggiato le interpolazioni sulle tre serie filtrate. L'asse temporale è sempre il medesimo, si può pensarlo come più fitto.
+
+L'ultimo grafico disegna infine le prime metà dei moduli delle tre trasformate DFT delle serie interpolate. L'asse delle frequenze è determinato da \mymath{f_c} = 256\,Hz ovvero la frequenza raggiunta al punto quattro.
+
+L'ascissa avente il maggior valore di ordinata (il quale non possiede alcun significato intrinseco) è il picco di frequenza da cercare. Esso, poi, moltiplicato per 60 restituirà l'HR finale.
+
+\section{Un ottimo esempio}
+Qui si può osservare contenuto informativo molto simile in tutti i tre canali. La distanza e la corretta illuminazione dell'epiderma sono fondamentali.
+\singlefig{risultati/trustcamfingergoodall/1.png}{RR}{12.0}{all1}
+\singlefig{risultati/trustcamfingergoodall/2.png}{standardizzazione.}{12.0}{all2}
+\singlefig{risultati/trustcamfingergoodall/3.png}{analisi ICA.}{12.0}{all3}
+\singlefig{risultati/trustcamfingergoodall/4.png}{interpolazione.}{12.0}{all4}
+\singlefig{risultati/trustcamfingergoodall/5.png}{analisi spettrale.}{12.0}{all5}
+I picchi, locati in \mymath{f} = 1.2,\,1.4\,Hz, forniscono rispettivamente HR = 72,\, 84\,bpm. 
+\section{Un medio esempio}
+In questo caso soltanto il canale rosso contiene a prima vista qualcosa di regolare correlabile all'heart rate. L'analisi procede e trova valori plausibili per quel canale. Si noti che, sebbene l'ICA abbia eliminato la corrispondenza canale-serie, soltanto una base ottenuta ha contenuti frequenziali molto simili a quelli che si avevano per il rosso.
+Implementazioni future potrebbero fare un pre-processing in frequenza per scartare le acquisizioni che non porteranno a valori significativi.
+\singlefig{risultati/trustcamfingergoodred/1.png}{RR}{11.0}{red1}
+\singlefig{risultati/trustcamfingergoodred/2.png}{standardizzazione.}{11.0}{red2}
+\singlefig{risultati/trustcamfingergoodred/3.png}{analisi ICA.}{11.0}{red3}
+\singlefig{risultati/trustcamfingergoodred/4.png}{interpolazione.}{11.0}{red4}
+\singlefig{risultati/trustcamfingergoodred/5.png}{analisi spettrale.}{11.0}{red5}
+L'unico picco che si ritiene fedele è locato in \mymath{f} = 1.1\,Hz e pertanto HR = 66\,bpm.

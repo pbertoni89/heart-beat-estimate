@@ -1,0 +1,2747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8" /> 
+ 
+     <title>An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting the Heart Rate Variability Tachogram without Resampling: MATLAB Open-Source Code and Internet Web-Based Implementation</title>
+    <link href="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/master.css" rel="stylesheet" type="text/css" />
+    <link href="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/xml_display.css" rel="stylesheet" type="text/css" />
+    <link href="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/hindawi.css" rel="stylesheet" type="text/css" />
+
+   
+   <link href="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/hindawi_print.css" rel="stylesheet" type="text/css" media="print" />
+  
+       <meta name="citation_journal_title" content="Computational and Mathematical Methods in Medicine" />
+       <meta name="citation_publisher" content="Hindawi Publishing Corporation" />
+       <meta name="citation_title" content="An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting the Heart Rate Variability Tachogram without Resampling: MATLAB Open-Source Code and Internet Web-Based Implementation" />
+       <meta name="citation_date" content="2012/03/06" />
+       <meta name="citation_year" content="2012" />
+       <meta name="dcterms.issued" content="2012/03/06" />
+       <meta name="citation_volume" content="2012" />
+       <meta name="citation_issn" content="1748-670X" />
+       <meta name="citation_abstract" content="The heart rate variability (HRV) signal derived from the ECG is a beat-to-beat record of RR intervals and is, as a time series, irregularly sampled. It is common engineering practice to resample this record, typically at 4&amp;#x02009;Hz, onto a regular time axis for analysis in advance of time domain filtering and spectral analysis based on the DFT. However, it is recognised that resampling introduces noise and frequency bias. The present work describes the implementation of a time-varying filter using a smoothing priors approach based on a Gaussian process model, which does not require data to be regular in time. Its output is directly compatible with the Lomb-Scargle algorithm for power density estimation. A web-based demonstration is available over the Internet for exemplar data. The MATLAB  (MathWorks Inc.) code can be downloaded as open source." />
+       <meta name="citation_pdf_url" content="http://downloads.hindawi.com/journals/cmmm/2012/578785.pdf" />
+       <meta name="citation_abstract_html_url" content="http://www.hindawi.com/journals/cmmm/2012/578785/abs/" />
+       <meta name="citation_author" content="Eleuteri, A." />
+       <meta name="dc.Contributor" content="Eleuteri, A." />
+       <meta name="citation_author" content="Fisher, A. C." />
+       <meta name="dc.Contributor" content="Fisher, A. C." />
+       <meta name="citation_author" content="Groves, D." />
+       <meta name="dc.Contributor" content="Groves, D." />
+       <meta name="citation_author" content="Dewhurst, C. J." />
+       <meta name="dc.Contributor" content="Dewhurst, C. J." />
+
+
+        <link rel="alternate" type="application/rss+xml" title="Computational and Mathematical Methods in Medicine latest articles" href="http://www.hindawi.com/journals/cmmm/rss.xml" />
+    <script src="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/jquery-1.4.4.min.js" type="text/javascript" />
+   
+   <meta name="Author" content="Hindawi Publishing Corporation" />
+       <meta name="Description" content="Computational and Mathematical Methods in Medicine publishes research and review articles focused on the application of mathematics to problems arising from the biomedical sciences. Areas of interest include gene therapy, cell kinetics, pharmacokinetics, chemotherapy, oncology, developmental biology, wound healing, physiology, heart modelling, cardiovascular and lung dynamics, neurobiology, computational neuroscience, biomechanics, biomedical statistics, image analysis, epidemiology, immunology, time series analysis, extracellular matrix properties and signalling, and tissue engineering." />
+
+<link rel="SHORTCUT ICON" href="http://www.hindawi.com/favicon.ico" type="image/x-icon" />
+<script>window["_GOOG_TRANS_EXT_VER"] = "1";</script><script>window["_GOOG_TRANS_EXT_VER"] = "1";</script></head>
+
+<body>
+    <div id="container">   
+        <div id="site_head">
+            <div class="logo">
+                
+                <a href="http://www.hindawi.com/" id="logourl">
+<img id="imgLogo" src="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/hindawi_logo.jpg" alt="Hindawi Publishing Corporation Logo" /> </a>
+            </div>
+            <div id="SearchPanel">
+                <div class="search_container">
+                    <div class="search">
+                     <form action="http://www.hindawi.com/search.aspx" method="post">   
+                        <input type="text" name="TxtSearchField1" id="TxtSearchField1_g" class="search_field" />
+                        <input type="hidden" name="DdlSearchField1" id="DdlSearchField1_g" value="AllFields" />
+                        <input type="submit" id="Button1" class="search_button" value="Go" />
+                     </form>
+                    </div>
+                   
+                </div>
+            </div>
+            <div id="dvslogan" class="slogan">
+               Hindawi Publishing Corporation
+            </div>
+        </div>
+            <div id="dvLinks" class="hindawi_links">
+                <ul>
+                    <li><a href="http://www.hindawi.com/">Home</a></li>
+                    <li><a href="http://www.hindawi.com/journals/">Journals</a></li>
+                    <li><a href="http://www.hindawi.com/about/">About Us</a></li>
+                </ul>
+            </div>
+            <div id="banner">
+                <img id="ImgTitle" style="height:130px;width:978px;border-width:0px;" src="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/cmmm.banner.jpg" alt="Computational and Mathematical Methods in Medicine" />
+            </div>
+            <div id="journal_navigation">
+                 <a id="AboutNav" href="http://www.hindawi.com/journals/cmmm/" class="journal_nav_links"> About this Journal </a>
+                 <a id="MtsNav" href="http://mts.hindawi.com/author/submit/cmmm/" class="journal_nav_links"> Submit a Manuscript </a>
+                 <a id="TableofContentsNav" href="http://www.hindawi.com/journals/cmmm/contents/" class="last_link"> Table of Contents </a>            </div>
+        <div id="content">
+            <!--left column-->
+            <div id="left_column">               
+                <!--left column-->
+ 
+ <div class="top_strip">
+     <div class="journal_icon">Journal Menu</div>
+ </div>       
+       
+ <div class="left_column_list">
+     <ul id="BltJournalInformation">
+	         <li><a href="http://www.hindawi.com/journals/cmmm/ai/">Abstracting and Indexing</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/aims/">Aims and Scope</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/annual.issues/">Annual Issues</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/apc/">Article Processing Charges</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/aip/">Articles in Press</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/guidelines/">Author Guidelines</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/biblio/">Bibliographic Information</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/contact/">Contact Information</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/editors/">Editorial Board</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/workflow/">Editorial Workflow</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/etoc/">Free eTOC Alerts</a></li>                               
+	         <li><a href="http://www.hindawi.com/journals/cmmm/reviewers/">Reviewers Acknowledgment</a></li>                               
+	         <li><a href="http://www.hindawi.com/subs/">Subscription Information</a></li>                               
+     </ul>
+</div>
+
+ 
+    <div id="SpecialIssuesDiv" class="special_issues">
+        <ul id="BltSpecialIssues">
+	        <li><a href="http://www.hindawi.com/journals/cmmm/osi/">Open Special Issues</a></li>
+                <li><a href="http://www.hindawi.com/journals/cmmm/psi/">Published Special Issues</a></li>
+            <li><a href="http://www.hindawi.com/journals/cmmm/siguidelines/">Special Issue Guidelines</a></li>
+        </ul>
+    </div>
+                          
+                <!--end left column-->
+                <!--middle content-->
+            </div>
+            <div class="middle_content">
+                 
+
+ 
+
+ 
+
+
+   <div class="right_column_actions">
+   <div id="article_list"> 
+<ul>
+    <li>
+    <a href="http://www.hindawi.com/journals/cmmm/2012/578785/abs/" class="abstract">Abstract</a>
+    </li>
+        <li><a href="http://downloads.hindawi.com/journals/cmmm/2012/578785.pdf" class="full_text_pdf">Full-Text PDF</a>
+            </li>
+
+        <li><a href="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV.xhtml" class="full_text_xhtml">Full-Text HTML</a></li>
+        <li><a href="http://downloads.hindawi.com/journals/cmmm/2012/578785.epub" class="full_text_epub">Full-Text ePUB</a>
+        </li>
+        <li><a href="http://www.hindawi.com/journals/cmmm/2012/578785/ref/" class="linked_ref">Linked References</a></li>
+    <li><a href="http://www.hindawi.com/journals/cmmm/2012/578785/cta/" class="how_to_cite">How to Cite this Article</a></li>
+           
+</ul>
+</div>
+ <div class="award" />
+ </div>
+
+
+
+<div><pre>Computational and Mathematical Methods in Medicine<br />Volume 2012 (2012), Article ID 578785, 6 pages<br />doi:10.1155/2012/578785</pre><div class="article_type">Research Article</div><h2>An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting the Heart Rate Variability Tachogram without Resampling: MATLAB Open-Source Code and Internet Web-Based Implementation</h2><div class="author_gp"><a href="http://www.hindawi.com/87901301/">A. Eleuteri</a>,<sup>1</sup> <a href="http://www.hindawi.com/56919715/">A. C. Fisher</a>,<sup>1</sup> <a href="http://www.hindawi.com/96750604/">D. Groves</a>,<sup>2</sup> and <a href="http://www.hindawi.com/30462402/">C. J. Dewhurst</a><sup>3</sup></div><p><sup>1</sup>Department of Medical Physics &amp; Clinical Engineering, Royal Liverpool &amp; Broadgreen University Hospital, Liverpool L7 8XP,  UK<br /><sup>2</sup>National Refractory Angina Centre, Royal Liverpool &amp; Broadgreen University Hospital, Liverpool L7 8XP,  UK<br /><sup>3</sup>Department of Neonatal Medicine, Liverpool Women’s Hospital, Liverpool L8 7SS,  UK</p><p>Received 13 May 2011; Revised 3 November 2011; Accepted 21 November 2011</p><p>Academic Editor: Quan Long </p><div class="xml-content"><p>Copyright © 2012 A. Eleuteri et al. This is an open access article distributed under the <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution License</a>, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.</p></div><div class="xml-content"><h4 class="header">Abstract</h4><p>The heart rate variability (HRV) signal derived from the ECG is a beat-to-beat record of RR intervals and is, as a time series, irregularly sampled. It is common engineering practice to resample this record, typically at 4 Hz, onto a regular time axis for analysis in advance of time domain filtering and spectral analysis based on the DFT. However, it is recognised that resampling introduces noise and frequency bias. The present work describes the implementation of a time-varying filter using a smoothing priors approach based on a Gaussian process model, which does not require data to be regular in time. Its output is directly compatible with the Lomb-Scargle algorithm for power density estimation. A web-based demonstration is available over the Internet for exemplar data. The MATLAB  (MathWorks Inc.) code can be downloaded as open source.</p><span class="end-abs" /><h4 id="sec1">1. Introduction</h4><p>A time record consisting of beat-to-beat RR intervals is referred to as the heart rate tachogram. This forms the basis for a number of metrics of heart rate variability (HRV). The simplest measures of HRV are based on variance determined over a range of time periods. More complex measures can be derived from power spectrum density (PSD) estimations. The two most commonly used PSDs are the Welch Periodogram, based on the DFT, and the AR Spectrum, based on an autoregressive process model [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B1">1</a>]. Both approaches require the data to be sampled regularly. Resampling the raw HRV data onto a regular time axis introduces noise into the signal and the information quality is compromised [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B1">1</a>]. Conventionally, the HRV power is reported over 3 bandwidths: [0.01 <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:17.200001px;" id="M1" height="5.0625" version="1.1" viewBox="0 0 17.200001 5.0625" width="17.200001">
+	<g transform="matrix(1.25,0,0,-1.25,0,5.0625)">
+		<g transform="translate(72,-67.95)">
+			<text transform="matrix(1,0,0,-1,-71.95,68)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">⋯</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> 0.04] Hz (Very Low Frequency, VLF) [0.04 <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:17.200001px;" id="M2" height="5.0625" version="1.1" viewBox="0 0 17.200001 5.0625" width="17.200001">
+	<g transform="matrix(1.25,0,0,-1.25,0,5.0625)">
+		<g transform="translate(72,-67.95)">
+			<text transform="matrix(1,0,0,-1,-71.95,68)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">⋯</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> 0.15] Hz (Low Frequency, LF), and [0.15 <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:17.200001px;" id="M3" height="5.0625" version="1.1" viewBox="0 0 17.200001 5.0625" width="17.200001">
+	<g transform="matrix(1.25,0,0,-1.25,0,5.0625)">
+		<g transform="translate(72,-67.95)">
+			<text transform="matrix(1,0,0,-1,-71.95,68)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">⋯</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> 0.4] Hz (High Frequency, HF) [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B1">1</a>, <a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B2">2</a>].</p><p>Prior to transformation into the frequency domain, normal practice requires that the time series data are “detrended” or “high-pass filtered” at a very low frequency, say ~0.005 Hz. There is no universally formal justification for such detrending other than it minimises the effects of medium-term nonstationarity within the immediate time epoch (window) of interest [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B2">2</a>]. Stationarity is an axiomatic assumption in conventional time-to-frequency transformation of the PSD (see Appendix <a href="http://www.hindawi.com/journals/cmmm/2012/578785/#sec10">B</a>). </p><p>A number of methods have been described to identify the trend component in the tachogram such that it can be simply removed by subtraction. These methods include fixed low-order polynomials [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B3">3</a>, <a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B4">4</a>], adaptive higher-order polynomials [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B5">5</a>, <a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B6">6</a>], and, more recently, the smoothing by priors approach (SPA) proposed by [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B7">7</a>] which they describe as a time-varying finite impulse high-pass filter. The SPA uses a technique well-established in modern time series analysis and it addresses directly the phenomenon of nonstationarity.</p><p>However, the Tarvainen approach suffers two limitations. The first is conceptual: the algorithm requires resampling by interpolation onto a regular time axis. The second is practical: the MATLAB implementation is computationally inefficient and expensive and consequently very slow. In practice, its application is limited to relatively short tachograms [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B7">7</a>]. </p><p>In the present work, a novel algorithm is introduced which obviates these limitations by extending the SPA. The Smoothing by Gaussian process Priors (SGP) method described here explicitly does not require resampling and executes in MATLAB at least an order of magnitude faster than the SPA. By employing the SGP twice in sequence, the bandpass effect achieves detrending (high-pass) and low-pass filtering which is directly compatible with the Lomb Scargle Periodogram (LSP) [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B8">8</a>]. </p><h4 id="sec2">2. The Smoothing Priors Approach</h4><p>The SPA method considers the problem of modelling the trend component in a time series with a linear observation model:<span class="displayed-label" id="EEq1"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M4" height="15.75" version="1.1" viewBox="0 0 700.9375 15.75" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,15.75)">
+		<g transform="translate(72,-59.4)">
+			<text transform="matrix(1,0,0,-1,168.52,63.2)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,174.76,60.07)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">t</tspan>
+				<tspan style="font-size: 8.75px; " x="2.4330561" y="0">r</tspan>
+				<tspan style="font-size: 8.75px; " x="5.329968" y="0">e</tspan>
+				<tspan style="font-size: 8.75px; " x="9.2158556" y="0">n</tspan>
+				<tspan style="font-size: 8.75px; " x="13.591856" y="0">d</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,196.69,63.2)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.040389" y="0">𝐇</tspan>
+				<tspan style="font-size: 12.50px; " x="21.767723" y="0">𝑦</tspan>
+				<tspan style="font-size: 12.50px; " x="30.744877" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="42.085098" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="48.411617" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="277.42999" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="281.59351" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="287.845" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span>
+					where <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:12.2875px;" id="M5" height="10.6875" version="1.1" viewBox="0 0 12.2875 10.6875" width="12.2875">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.6875)">
+		<g transform="translate(72,-63.45)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐇</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is the observation matrix, <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.11285pt;width:8.0375004px;" id="M6" height="7.4250002" version="1.1" viewBox="0 0 8.0375004 7.4250002" width="8.0375004">
+	<g transform="matrix(1.25,0,0,-1.25,0,7.425)">
+		<g transform="translate(72,-66.06)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.22)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑣</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is observation error, and <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.29482pt;width:7.875px;" id="M7" height="9.8625002" version="1.1" viewBox="0 0 7.875 9.8625002" width="7.875">
+	<g transform="matrix(1.25,0,0,-1.25,0,9.8625)">
+		<g transform="translate(72,-64.11)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.45)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑦</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> are parameters to be determined. The solution to estimating the trend is then expressed in terms of minimisation of a regularised least squares problem:<span class="displayed-label" id="EEq2"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M8" height="32.6875" version="1.1" viewBox="0 0 700.9375 32.6875" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,32.6875)">
+		<g transform="translate(72,-45.85)">
+			<text transform="matrix(1,0,0,-1,110.52,60.2)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">̂</tspan>
+				<tspan style="font-size: 12.50px; " x="-6.851644" y="0">𝑦</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,109.86,57.08)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,118.97,60.2)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.027886" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="17.579218" y="0">r</tspan>
+				<tspan style="font-size: 12.50px; " x="21.555172" y="0">g</tspan>
+				<tspan style="font-size: 12.50px; " x="27.806671" y="0">m</tspan>
+				<tspan style="font-size: 12.50px; " x="37.534004" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="41.009838" y="0">n</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,146.44,49.97)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑦</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,166.23,60.19)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">‖</tspan>
+				<tspan style="font-size: 12.50px; " x="6.5300002" y="-0.0099999998">𝐇</tspan>
+				<tspan style="font-size: 12.50px; " x="16.257334" y="-0.0099999998">𝑦</tspan>
+				<tspan style="font-size: 12.50px; " x="25.234488" y="-0.0099999998">−</tspan>
+				<tspan style="font-size: 12.50px; " x="36.574711" y="-0.0099999998">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="42.813705" y="-0.0099999998">‖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,217.68,65.54)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,225.33,60.2)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,244.01,65.2)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,248.89,60.69)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">‖</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0.99000001">‖</tspan>
+				<tspan style="font-size: 12.50px; " x="6.54" y="0.49000001">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,264.45,57.08)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑑</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,272.22,60.21)">
+				<tspan style="font-size: 12.50px; " x="24.25" y="-0.47999999">‖</tspan>
+				<tspan style="font-size: 12.50px; " x="24.25" y="0.50999999">‖</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="4.1634989" y="0">𝐇</tspan>
+				<tspan style="font-size: 12.50px; " x="13.890833" y="0">𝑦</tspan>
+				<tspan style="font-size: 12.50px; " x="20.092321" y="0">)</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,305.1,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,309.97,60.2)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="164.14999" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="168.31349" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="174.565" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span>
+					where <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.13794pt;width:9.3000002px;" id="M9" height="6.9875002" version="1.1" viewBox="0 0 9.3000002 6.9875002" width="9.3000002">
+	<g transform="matrix(1.25,0,0,-1.25,0,6.9875)">
+		<g transform="translate(72,-66.41)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.6)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is a regularisation parameter and <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.24037pt;width:18.512501px;" id="M10" height="14.725" version="1.1" viewBox="0 0 18.512501 14.725" width="18.512501">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.725)">
+		<g transform="translate(72,-60.22)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-62.92,60.37)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑑</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is the discrete approximation to the <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.15048pt;width:9.375px;" id="M11" height="10.75" version="1.1" viewBox="0 0 9.375 10.75" width="9.375">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.75)">
+		<g transform="translate(72,-63.4)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.6)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑑</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>th derivative operator.</p><p>By choosing <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:12.2875px;" id="M12" height="10.6875" version="1.1" viewBox="0 0 12.2875 10.6875" width="12.2875">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.6875)">
+		<g transform="translate(72,-63.45)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐇</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> as the identity matrix, and <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.15048pt;width:35.637501px;" id="M13" height="10.875" version="1.1" viewBox="0 0 35.637501 10.875" width="35.637501">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.875)">
+		<g transform="translate(72,-63.3)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑑</tspan>
+				<tspan style="font-size: 12.50px; " x="10.114927" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="22.155315" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>, the solution can be written as<span class="displayed-label" id="EEq3"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M14" height="22.825001" version="1.1" viewBox="0 0 700.9375 22.825001" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,22.825)">
+		<g transform="translate(72,-53.74)">
+			<text transform="matrix(1,0,0,-1,155.61,58.35)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">̂</tspan>
+				<tspan style="font-size: 12.50px; " x="-6.851644" y="0">𝑦</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,154.95,55.23)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,164.06,58.35)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.03" y="2.51"></tspan>
+				<tspan style="font-size: 12.50px; " x="17.889999" y="0">𝐈</tspan>
+				<tspan style="font-size: 12.50px; " x="25.51683" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="36.869553" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,208.27,63.35)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,213.14,58.35)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,222.17,63.52)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">T</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,222.17,54.3)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,228.02,58.35)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,237.04,55.23)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,241.92,55.84)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,247.77,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,258.64,58.35)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="6.238997" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="215.48" y="-1.39">(</tspan>
+				<tspan style="font-size: 12.50px; " x="219.64349" y="-1.39">3</tspan>
+				<tspan style="font-size: 12.50px; " x="225.895" y="-1.39">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span></p><p>Tarvainen et al. argue that selection of the observation matrix is done to simplify things, in the context of estimating parameters in a finite-dimensional space. A Bayesian interpretation of (<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#EEq2">2</a>) is given, but always in the context of finite-dimensional parameter spaces. It is interesting and useful to give a different interpretation in the context of Gaussian Process (GP) priors, which implies a function-space view, rather than a parametric view, of the regression problem. In passing it is noted that the SPA, as published, is markedly inefficient and potentially unstable in using matrix inversion. A more efficient approach is presented as Appendix <a href="http://www.hindawi.com/journals/cmmm/2012/578785/#sec11">C</a>. </p><h4 id="sec3">3. An Alternative Smoothing Prior Operator</h4><p>Use of the <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.13504pt;width:17.5px;" id="M15" height="14.6" version="1.1" viewBox="0 0 17.5 14.6" width="17.5">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.6)">
+		<g transform="translate(72,-60.32)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-62.92,60.37)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> operator implies uniform sampling of the data and in the case of the HRV tachogram requires that the raw data be projected onto a regular time axis using some means of interpolation. Such a projection is frequently referred to as <i>resampling</i> which is undesirable in that it corrupts, preferentially, the higher frequency components [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B2">2</a>]. In the present development, it is proposed that resampling can be avoided by using a different approximation for the second-order derivative operator. The usual approximation is based on a centred formula:<span class="displayed-label" id="EEq6"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M16" height="40.6875" version="1.1" viewBox="0 0 700.9375 40.6875" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,40.6875)">
+		<g transform="translate(72,-39.45)">
+			<text transform="matrix(1,0,0,-1,76.63,50.56)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑓</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,85.07,55.63)">
+				<tspan style="font-size: 8.75px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 8.75px; " x="2.9756801" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,93.6,48.04)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="5.8600001" y="-2.52">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,106.33,47.43)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,109.55,48.04)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="9.3299999" y="-2.52">=</tspan>
+				<tspan style="font-size: 12.50px; " x="22.559999" y="-13.09">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="33.080002" y="-10.58"></tspan>
+				<tspan style="font-size: 12.50px; " x="38.93" y="-13.09">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,155.36,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">+</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,168.95,58.62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="36.75" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="42.599998" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="8.6300001" y="-2.51">−</tspan>
+				<tspan style="font-size: 12.50px; " x="19.970221" y="-2.51">2</tspan>
+				<tspan style="font-size: 12.50px; " x="26.221722" y="-2.51">𝑓</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,218.43,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,221.65,58.62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="30.5" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="36.349998" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="8.6300001" y="-2.51">+</tspan>
+				<tspan style="font-size: 12.50px; " x="19.970221" y="-2.51">𝑓</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,264.87,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,278.46,58.62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+			</text>
+
+			<g>
+				<path d="m 132.11,53.68 152.21,0" style="fill:none;stroke:#000000;stroke-width:0.82499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+			</g>
+			<text transform="matrix(1,0,0,-1,202.17,39.62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">ℎ</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,209.38,44.88)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,288.29,50.56)">
+				<tspan style="font-size: 12.50px; " x="22.83" y="2.52"></tspan>
+				<tspan style="font-size: 12.50px; " x="28.68" y="0">ℎ</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑂</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,324.19,55.81)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,329.06,48.04)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.9299998" y="-2.52">,</tspan>
+				<tspan style="font-size: 12.50px; " x="145.06" y="-2.52">(</tspan>
+				<tspan style="font-size: 12.50px; " x="149.2235" y="-2.52">4</tspan>
+				<tspan style="font-size: 12.50px; " x="155.47501" y="-2.52">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span>
+					which implies that each row of the <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.13504pt;width:17.5px;" id="M17" height="14.6" version="1.1" viewBox="0 0 17.5 14.6" width="17.5">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.6)">
+		<g transform="translate(72,-60.32)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-62.92,60.37)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> matrix is the constant vector [1,−2,1]. </p><p>A different approximation formula to the derivative, which does not imply uniform sampling, can also be obtained by Taylor expansion with nonuniform increments. After some algebra,<span class="displayed-label" id="EEq7"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M18" height="45.787498" version="1.1" viewBox="0 0 700.9375 45.787498" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,45.7875)">
+		<g transform="translate(72,-35.37)">
+			<text transform="matrix(1,0,0,-1,-12.14,50.56)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑓</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-3.7,55.63)">
+				<tspan style="font-size: 8.75px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 8.75px; " x="2.9756801" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,4.83,48.04)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="5.8499999" y="-2.52">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,17.56,47.43)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,20.78,48.04)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="28.809999" y="-13.09">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="39.330002" y="-10.58"></tspan>
+				<tspan style="font-size: 12.50px; " x="45.189999" y="-13.09">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="9.3299999" y="-2.52">=</tspan>
+				<tspan style="font-size: 12.50px; " x="21.357885" y="-2.52">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,72.84,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">+</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,86.43,58.62)">
+				<tspan style="font-size: 12.50px; " x="13.79" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.9269018" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,107.1,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,123.47,61.13)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,141.69,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,144.91,58.62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="30.49" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="36.34" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="8.6300001" y="-2.51">−</tspan>
+				<tspan style="font-size: 12.50px; " x="19.957718" y="-2.51">𝑓</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,188.13,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,191.35,58.62)">
+				<tspan style="font-size: 12.50px; " x="13.79" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.9269018" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,212.02,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,228.38,61.13)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,246.6,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">+</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,260.2,58.62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="30.49" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="36.34" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="8.6300001" y="-2.51">+</tspan>
+				<tspan style="font-size: 12.50px; " x="19.957718" y="-2.51">𝑓</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,303.42,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,317.01,58.62)">
+				<tspan style="font-size: 12.50px; " x="13.79" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.9269018" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,337.68,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,343.67,61.13)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,361.89,58.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">+</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,375.49,58.62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+			</text>
+
+			<g>
+				<path d="m 49.59,53.68 331.75,0" style="fill:none;stroke:#000000;stroke-width:0.82499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+			</g>
+			<text transform="matrix(1,0,0,-1,123.61,37.47)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="5.8499999" y="-2.51">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,136.34,36.85)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,152.71,39.98)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,170.93,36.85)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,174.15,37.47)">
+				<tspan style="font-size: 12.50px; " x="13.79" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.9269018" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,194.81,36.85)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,211.18,39.98)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,229.4,36.85)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">+</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,242.99,37.47)">
+				<tspan style="font-size: 12.50px; " x="13.79" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.9269018" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,263.66,36.85)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,269.65,39.98)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,287.87,36.85)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">+</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,301.47,37.47)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="83.839996" y="-13.09">+</tspan>
+				<tspan style="font-size: 12.50px; " x="95.180222" y="-13.09">𝑂</tspan>
+				<tspan style="font-size: 12.50px; " x="106.65797" y="-13.09">(</tspan>
+				<tspan style="font-size: 12.50px; " x="110.82147" y="-13.09">ℎ</tspan>
+				<tspan style="font-size: 12.50px; " x="118.03571" y="-13.09">)</tspan>
+				<tspan style="font-size: 12.50px; " x="124.28721" y="-13.09">,</tspan>
+				<tspan style="font-size: 12.50px; " x="172.64999" y="-13.09">(</tspan>
+				<tspan style="font-size: 12.50px; " x="176.81349" y="-13.09">5</tspan>
+				<tspan style="font-size: 12.50px; " x="183.065" y="-13.09">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span> where <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.1254pt;width:9.1374998px;" id="M19" height="10.95" version="1.1" viewBox="0 0 9.1374998 10.95" width="9.1374998">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.95)">
+		<g transform="translate(72,-63.24)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.41)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">ℎ</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is now the maximum local grid spacing.</p><p>The rows of the operator now explicitly depend on the <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.11285pt;width:8.7250004px;" id="M20" height="7.1624999" version="1.1" viewBox="0 0 8.7250004 7.1624999" width="8.7250004">
+	<g transform="matrix(1.25,0,0,-1.25,0,7.1625)">
+		<g transform="translate(72,-66.27)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.44)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑥</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> values as desired:
+						<span class="displayed-label" id="eq1"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M21" height="107.45" version="1.1" viewBox="0 0 700.9375 107.45" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,107.45)">
+		<g transform="translate(72,13.96)">
+			<text transform="matrix(1,0,0,-1,67.78,39.87)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="68.949997" y="-16.98">2</tspan>
+			</text>
+
+			<g>
+				<path d="m 77.24,52.73 125.23,0" style="fill:none;stroke:#000000;stroke-width:0.82499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+			</g>
+			<text transform="matrix(1,0,0,-1,77.24,36.51)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="5.8499999" y="-2.51">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,89.96,35.9)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">+</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,106.33,39.02)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,124.55,35.9)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,138.14,36.51)">
+				<tspan style="font-size: 12.50px; " x="13.79" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.939405" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,158.81,35.9)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">+</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,175.18,39.02)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,193.4,35.9)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,196.62,36.51)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.04" y="-13.09">,</tspan>
+				<tspan style="font-size: 12.50px; " x="-117.69" y="34.32">−</tspan>
+				<tspan style="font-size: 12.50px; " x="-53.619999" y="27.07">2</tspan>
+			</text>
+
+			<g>
+				<path d="m 88.69,5.31 114.87,0" style="fill:none;stroke:#000000;stroke-width:0.82499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+			</g>
+			<text transform="matrix(1,0,0,-1,88.69,-10.9)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="5.8600001" y="-2.51">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,101.42,-11.52)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">+</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,117.79,-8.39)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,136.01,-11.52)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,139.23,-10.9)">
+				<tspan style="font-size: 12.50px; " x="13.79" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.9269018" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,159.89,-11.52)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,165.89,-8.39)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,184.11,-11.52)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,197.7,-10.9)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.0500002" y="-13.09">,</tspan>
+				<tspan style="font-size: 12.50px; " x="72.949997" y="-20.34">2</tspan>
+			</text>
+
+			<g>
+				<path d="m 211.16,5.31 125.23,0" style="fill:none;stroke:#000000;stroke-width:0.82499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+			</g>
+			<text transform="matrix(1,0,0,-1,211.16,-10.9)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="5.8499999" y="-2.51">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,223.88,-11.52)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">+</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,240.25,-8.39)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,258.47,-11.52)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,272.07,-10.9)">
+				<tspan style="font-size: 12.50px; " x="13.78" y="-2.51">𝑥</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.9269018" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,292.73,-11.52)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,298.73,-8.39)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑥</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,316.95,-11.52)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑖</tspan>
+				<tspan style="font-size: 8.75px; " x="2.7218721" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="8.7169924" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,330.54,-10.9)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.0500002" y="-3.3499999"></tspan>
+				<tspan style="font-size: 12.50px; " x="17.389999" y="-13.09">.</tspan>
+				<tspan style="font-size: 12.50px; " x="143.58" y="-36.790001">(</tspan>
+				<tspan style="font-size: 12.50px; " x="147.7435" y="-36.790001">6</tspan>
+				<tspan style="font-size: 12.50px; " x="153.995" y="-36.790001">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span></p><p>The operator is denoted by the symbol <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.13504pt;width:17.5px;" id="M22" height="19.549999" version="1.1" viewBox="0 0 17.5 19.549999" width="17.5">
+	<g transform="matrix(1.25,0,0,-1.25,0,19.55)">
+		<g transform="translate(72,-56.36)">
+			<text transform="matrix(1,0,0,-1,-71.05,62.36)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="-0.89999998" y="2.8299999">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-62.92,56.41)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>.</p><p>An efficient implementation of the above algorithm (MATLAB) is the following:<span class="list"><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.7337pt;width:86.487503px;" id="M23" height="14.2" version="1.1" viewBox="0 0 86.487503 14.2" width="86.487503">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.2)">
+		<g transform="translate(72,-60.64)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.41)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">T</tspan>
+				<tspan style="font-size: 12.50px; " x="11.102664" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="23.143053" y="0">l</tspan>
+				<tspan style="font-size: 12.50px; " x="26.618887" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="32.170219" y="0">n</tspan>
+				<tspan style="font-size: 12.50px; " x="38.421719" y="0">g</tspan>
+				<tspan style="font-size: 12.50px; " x="44.673218" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="48.249077" y="0">h</tspan>
+				<tspan style="font-size: 12.50px; " x="54.500576" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="58.664078" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="64.915573" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+						</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.21957pt;width:101.575px;" id="M24" height="13.5625" version="1.1" viewBox="0 0 101.575 13.5625" width="101.575">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.5625)">
+		<g transform="translate(72,-61.15)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.41)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="3.4758339" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="13.190665" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="25.231054" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="34.958389" y="0">∶</tspan>
+				<tspan style="font-size: 12.50px; " x="44.823254" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="48.986755" y="0">T</tspan>
+				<tspan style="font-size: 12.50px; " x="59.401752" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="70.741974" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="76.993477" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+						</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.72116pt;width:84.925003px;" id="M25" height="14.1875" version="1.1" viewBox="0 0 84.925003 14.1875" width="84.925003">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.1875)">
+		<g transform="translate(72,-60.65)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.41)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="3.4758339" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="9.727334" y="0">p</tspan>
+				<tspan style="font-size: 12.50px; " x="15.978834" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="25.693665" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="37.734055" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="41.209888" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="50.237053" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="61.577274" y="0">1</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+						</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.12538pt;width:89.275002px;" id="M26" height="10.95" version="1.1" viewBox="0 0 89.275002 10.95" width="89.275002">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.95)">
+		<g transform="translate(72,-63.24)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.41)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="3.4758339" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="9.727334" y="0">m</tspan>
+				<tspan style="font-size: 12.50px; " x="19.454668" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="29.169498" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="41.209888" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="44.685722" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="53.712887" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="65.053108" y="0">1</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+						</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.72116pt;width:306.82501px;" id="M27" height="14.925" version="1.1" viewBox="0 0 306.82501 14.925" width="306.82501">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.925)">
+		<g transform="translate(72,-60.06)">
+			<text transform="matrix(1,0,0,-1,-71.95,62.83)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">V</tspan>
+				<tspan style="font-size: 12.50px; " x="9.0271664" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="18.741997" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="30.782387" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="37.033886" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="40.159637" y="0">/</tspan>
+				<tspan style="font-size: 12.50px; " x="43.635471" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="47.798969" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="51.962467" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="58.213966" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="62.377468" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="65.853302" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="72.104797" y="0">m</tspan>
+				<tspan style="font-size: 12.50px; " x="81.832138" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="88.083633" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="95.022797" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="106.36302" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="112.62702" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="116.79052" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="120.26636" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="126.51786" y="0">p</tspan>
+				<tspan style="font-size: 12.50px; " x="132.76936" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="139.02086" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="143.18436" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="147.34785" y="0">.</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,80.61,67.83)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">∗</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,85.68,62.83)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="4.1634989" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="10.414999" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="14.578498" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="18.054333" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="24.305832" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="31.244997" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="42.585217" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="48.83672" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="53.000217" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="56.476051" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="62.727551" y="0">p</tspan>
+				<tspan style="font-size: 12.50px; " x="68.97905" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="75.230553" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="79.394051" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="83.557549" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+						</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.72116pt;width:301.89999px;" id="M28" height="14.925" version="1.1" viewBox="0 0 301.89999 14.925" width="301.89999">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.925)">
+		<g transform="translate(72,-60.06)">
+			<text transform="matrix(1,0,0,-1,-71.95,62.83)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">V</tspan>
+				<tspan style="font-size: 12.50px; " x="9.0271664" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="18.741997" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="30.782387" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="39.346943" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="45.598442" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="48.72419" y="0">/</tspan>
+				<tspan style="font-size: 12.50px; " x="52.200024" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="56.363525" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="60.527023" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="66.778526" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="70.942024" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="74.417854" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="80.669357" y="0">m</tspan>
+				<tspan style="font-size: 12.50px; " x="90.39669" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="96.648193" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="103.58736" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="114.94008" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="121.19158" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="125.35508" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="128.83092" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="135.08241" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="139.24591" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="143.40941" y="0">.</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,76.67,67.83)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">∗</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,81.75,62.83)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="4.1634989" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="10.414999" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="14.578498" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="18.054333" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="24.305832" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="31.232494" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="42.585217" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="48.83672" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="53.000217" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="56.476051" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="62.727551" y="0">p</tspan>
+				<tspan style="font-size: 12.50px; " x="68.97905" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="75.230553" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="79.394051" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="83.557549" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+						</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.72116pt;width:311.17499px;" id="M29" height="14.925" version="1.1" viewBox="0 0 311.17499 14.925" width="311.17499">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.925)">
+		<g transform="translate(72,-60.06)">
+			<text transform="matrix(1,0,0,-1,-71.95,62.83)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">V</tspan>
+				<tspan style="font-size: 12.50px; " x="9.0271664" y="0">3</tspan>
+				<tspan style="font-size: 12.50px; " x="18.741997" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="30.782387" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="37.033886" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="40.159637" y="0">/</tspan>
+				<tspan style="font-size: 12.50px; " x="43.635471" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="47.798969" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="51.962467" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="58.213966" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="62.377468" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="65.853302" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="72.104797" y="0">m</tspan>
+				<tspan style="font-size: 12.50px; " x="81.832138" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="88.083633" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="95.022797" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="106.36302" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="112.62702" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="116.79052" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="120.26636" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="126.51786" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="130.68135" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="134.84485" y="0">.</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,68.11,67.83)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">∗</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,73.18,62.83)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="4.1634989" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="10.414999" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="14.578498" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="18.054333" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="24.305832" y="0">m</tspan>
+				<tspan style="font-size: 12.50px; " x="34.033165" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="40.284664" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="47.223831" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="58.564053" y="0">x</tspan>
+				<tspan style="font-size: 12.50px; " x="64.815552" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="68.97905" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="72.454887" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="78.706383" y="0">p</tspan>
+				<tspan style="font-size: 12.50px; " x="84.957886" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="91.209389" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="95.372887" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="99.536385" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+						</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.78387pt;width:365.39999px;" id="M30" height="14.6875" version="1.1" viewBox="0 0 365.39999 14.6875" width="365.39999">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.6875)">
+		<g transform="translate(72,-60.25)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.07)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">D</tspan>
+				<tspan style="font-size: 12.50px; " x="9.0271664" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="15.278666" y="0">h</tspan>
+				<tspan style="font-size: 12.50px; " x="21.530167" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="27.081497" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="34.020664" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="46.06105" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="50.924721" y="0">p</tspan>
+				<tspan style="font-size: 12.50px; " x="57.17622" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="63.427719" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="66.903549" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="72.454887" y="0">g</tspan>
+				<tspan style="font-size: 12.50px; " x="78.706383" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="87.733551" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="91.897049" y="0">[</tspan>
+				<tspan style="font-size: 12.50px; " x="96.060547" y="0">V</tspan>
+				<tspan style="font-size: 12.50px; " x="105.08772" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="111.33922" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="116.55296" y="0">V</tspan>
+				<tspan style="font-size: 12.50px; " x="125.58013" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="131.83163" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="137.04538" y="0">V</tspan>
+				<tspan style="font-size: 12.50px; " x="146.07256" y="0">3</tspan>
+				<tspan style="font-size: 12.50px; " x="152.32405" y="0">]</tspan>
+				<tspan style="font-size: 12.50px; " x="159.26321" y="0">⧵</tspan>
+				<tspan style="font-size: 12.50px; " x="168.57794" y="0">V</tspan>
+				<tspan style="font-size: 12.50px; " x="177.60512" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="183.85661" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="188.02011" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="194.27161" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="198.43512" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="203.64886" y="0">[</tspan>
+				<tspan style="font-size: 12.50px; " x="207.81236" y="0">0</tspan>
+				<tspan style="font-size: 12.50px; " x="219.61519" y="0">∶</tspan>
+				<tspan style="font-size: 12.50px; " x="231.56807" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="237.81956" y="0">]</tspan>
+				<tspan style="font-size: 12.50px; " x="241.98306" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="247.18431" y="0">T</tspan>
+				<tspan style="font-size: 12.50px; " x="257.61182" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="268.95203" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="275.20352" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="280.4173" y="0">T</tspan>
+				<tspan style="font-size: 12.50px; " x="288.05661" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+						</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.7337pt;width:345.83749px;" id="M31" height="16.2875" version="1.1" viewBox="0 0 345.83749 16.2875" width="345.83749">
+	<g transform="matrix(1.25,0,0,-1.25,0,16.2875)">
+		<g transform="translate(72,-58.97)">
+			<text transform="matrix(1,0,0,-1,-71.95,61.75)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">L</tspan>
+				<tspan style="font-size: 12.50px; " x="11.102664" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="23.143053" y="0">c</tspan>
+				<tspan style="font-size: 12.50px; " x="28.50684" y="0">h</tspan>
+				<tspan style="font-size: 12.50px; " x="34.758339" y="0">o</tspan>
+				<tspan style="font-size: 12.50px; " x="41.009838" y="0">l</tspan>
+				<tspan style="font-size: 12.50px; " x="44.485676" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="48.649174" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="53.51284" y="0">p</tspan>
+				<tspan style="font-size: 12.50px; " x="59.764339" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="65.053108" y="0">y</tspan>
+				<tspan style="font-size: 12.50px; " x="71.017036" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="76.568375" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="80.731873" y="0">T</tspan>
+				<tspan style="font-size: 12.50px; " x="88.371201" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="95.297867" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="106.63808" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="111.50175" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="114.97758" y="0">g</tspan>
+				<tspan style="font-size: 12.50px; " x="121.22909" y="0">m</tspan>
+				<tspan style="font-size: 12.50px; " x="130.95642" y="0">a</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,66.66,66.75)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">∧</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,72.58,61.75)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,80.92,66.75)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">∗</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,85.99,61.75)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">D</tspan>
+				<tspan style="font-size: 12.50px; " x="9.0271664" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="15.278666" y="0">h</tspan>
+				<tspan style="font-size: 12.50px; " x="21.530167" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="27.081497" y="0">t</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,116.55,67.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 8.75px; " x="5.5599999" y="0.25999999">∗</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,127.18,61.75)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">D</tspan>
+				<tspan style="font-size: 12.50px; " x="9.0271664" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="15.278666" y="0">h</tspan>
+				<tspan style="font-size: 12.50px; " x="21.530167" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="27.081497" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="30.557331" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="35.758579" y="0">`</tspan>
+				<tspan style="font-size: 12.50px; " x="39.922077" y="0">l</tspan>
+				<tspan style="font-size: 12.50px; " x="43.397915" y="0">o</tspan>
+				<tspan style="font-size: 12.50px; " x="49.386848" y="0">w</tspan>
+				<tspan style="font-size: 12.50px; " x="58.188961" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="63.740295" y="0">r</tspan>
+				<tspan style="font-size: 12.50px; " x="67.903793" y="0">'</tspan>
+				<tspan style="font-size: 12.50px; " x="73.267578" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+						</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.78387pt;width:154.2px;" id="M32" height="16.025" version="1.1" viewBox="0 0 154.2 16.025" width="154.2">
+	<g transform="matrix(1.25,0,0,-1.25,0,16.025)">
+		<g transform="translate(72,-59.18)">
+			<text transform="matrix(1,0,0,-1,-71.95,62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="6.238997" y="0">_</tspan>
+				<tspan style="font-size: 12.50px; " x="12.490497" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="17.254141" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="20.842501" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="26.393833" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="33.345501" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="45.385891" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="54.400555" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="65.740776" y="0">L</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,1.44,67.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,7.7,62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">⧵</tspan>
+				<tspan style="font-size: 12.50px; " x="9.3022318" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="13.465731" y="0">L</tspan>
+				<tspan style="font-size: 12.50px; " x="23.893232" y="0">⧵</tspan>
+				<tspan style="font-size: 12.50px; " x="33.20797" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="39.446964" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+						</span></span></span></p><p>
+				Note that to reduce the possibility of numerical instabilities in the solution of the linear systems, the D2hat matrix is normalised by the first element of vector V1. </p><h4 id="sec4">4. Equivalent Kernel and Smoothing</h4><p>The operation of the smoothing priors can be understood by looking at the following simplified form:<span class="displayed-label" id="EEq8"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M33" height="15.75" version="1.1" viewBox="0 0 700.9375 15.75" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,15.75)">
+		<g transform="translate(72,-59.4)">
+			<text transform="matrix(1,0,0,-1,187.97,63.2)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑦</tspan>
+				<tspan style="font-size: 12.50px; " x="9.6773224" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="21.705208" y="0">𝐇</tspan>
+				<tspan style="font-size: 12.50px; " x="31.432543" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="37.671539" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="286.14999" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="290.31351" y="0">7</tspan>
+				<tspan style="font-size: 12.50px; " x="296.565" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span>
+					where <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.17555pt;width:7.9250002px;" id="M34" height="7.375" version="1.1" viewBox="0 0 7.9250002 7.375" width="7.9250002">
+	<g transform="matrix(1.25,0,0,-1.25,0,7.375)">
+		<g transform="translate(72,-66.1)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.32)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is the vector of data and <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:12.2875px;" id="M35" height="10.6875" version="1.1" viewBox="0 0 12.2875 10.6875" width="12.2875">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.6875)">
+		<g transform="translate(72,-63.45)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐇</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is the matrix coefficient of (<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#EEq3">3</a>). The smoother acts as a linear filter.</p><p>Since each element of <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.17555pt;width:7.9250002px;" id="M36" height="7.375" version="1.1" viewBox="0 0 7.9250002 7.375" width="7.9250002">
+	<g transform="matrix(1.25,0,0,-1.25,0,7.375)">
+		<g transform="translate(72,-66.1)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.32)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> and <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.29482pt;width:7.875px;" id="M37" height="9.8625002" version="1.1" viewBox="0 0 7.875 9.8625002" width="7.875">
+	<g transform="matrix(1.25,0,0,-1.25,0,9.8625)">
+		<g transform="translate(72,-64.11)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.45)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑦</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> can be thought of as placed at a distinct time point, it is seen that each row of the <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:12.2875px;" id="M38" height="10.6875" version="1.1" viewBox="0 0 12.2875 10.6875" width="12.2875">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.6875)">
+		<g transform="translate(72,-63.45)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐇</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> matrix acts over all the elements of <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.17555pt;width:7.9250002px;" id="M39" height="7.375" version="1.1" viewBox="0 0 7.9250002 7.375" width="7.9250002">
+	<g transform="matrix(1.25,0,0,-1.25,0,7.375)">
+		<g transform="translate(72,-66.1)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.32)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> to produce a single element of <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.29482pt;width:7.875px;" id="M40" height="9.8625002" version="1.1" viewBox="0 0 7.875 9.8625002" width="7.875">
+	<g transform="matrix(1.25,0,0,-1.25,0,9.8625)">
+		<g transform="translate(72,-64.11)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.45)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑦</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>. Consequently, the filter is noncausal. In fact, each row of <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:12.2875px;" id="M41" height="10.6875" version="1.1" viewBox="0 0 12.2875 10.6875" width="12.2875">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.6875)">
+		<g transform="translate(72,-63.45)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐇</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> defines a <i>weighting function</i>. Each weighting function is localised around a specific time, and its bandwidth determines how many samples from the past and from the future contribute to the estimate. The wider the weighting function, the smoother the resulting estimates.</p><p>In the case of uniformly sampled data, the weighting functions have the same shape (except at the boundaries), which can be imagined as a sliding window translating in time: this is a consequence of the definition of the <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.13504pt;width:17.5px;" id="M42" height="14.6" version="1.1" viewBox="0 0 17.5 14.6" width="17.5">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.6)">
+		<g transform="translate(72,-60.32)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-62.92,60.37)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> operator, which is time independent. Figure <a target="_blank" href="http://www.hindawi.com/journals/cmmm/2012/578785/fig1/">1</a> shows some weight functions implied by the <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.13504pt;width:17.5px;" id="M43" height="14.6" version="1.1" viewBox="0 0 17.5 14.6" width="17.5">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.6)">
+		<g transform="translate(72,-60.32)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-62.92,60.37)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> operator.</p><div class="fig"><div class="figgroupcaption"><a target="_blank" class="thumbnail" href="http://www.hindawi.com/journals/cmmm/2012/578785/fig1/"><img alt="578785.fig.001" src="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/578785.fig.001_th.jpg" /></a></div><div class="groupcaption"><b>Figure 1: </b>Weight functions (<i>viz. </i><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.13504pt;width:17.5px;" id="M44" height="14.6" version="1.1" viewBox="0 0 17.5 14.6" width="17.5">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.6)">
+		<g transform="translate(72,-60.32)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-62.92,60.37)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> operator).</div></div><p>However, for the case of arbitrarily (irregularly) sampled data of the HRV tachogram, the <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.13504pt;width:17.5px;" id="M45" height="19.549999" version="1.1" viewBox="0 0 17.5 19.549999" width="17.5">
+	<g transform="matrix(1.25,0,0,-1.25,0,19.55)">
+		<g transform="translate(72,-56.36)">
+			<text transform="matrix(1,0,0,-1,-71.05,62.36)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="-0.89999998" y="2.8299999">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-62.92,56.41)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> operator actually depends on time; therefore the weighting functions will take on a different shape. This makes the resulting filter effectively a time-variant filter. It is possible to calculate the transfer function of the filter <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:12.2875px;" id="M46" height="10.6875" version="1.1" viewBox="0 0 12.2875 10.6875" width="12.2875">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.6875)">
+		<g transform="translate(72,-63.45)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐇</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> in the limit as the number of data points tends to infinity. It can be shown [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B2">2</a>] that the (non-stationary) spectral density of the Gaussian process prior is<span class="displayed-label" id="EEq9"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M47" height="36.112499" version="1.1" viewBox="0 0 700.9375 36.112499" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,36.1125)">
+		<g transform="translate(72,-43.11)">
+			<text transform="matrix(1,0,0,-1,167.91,56.25)">
+				<tspan style="font-size: 12.50px; " x="57.459999" y="-7.25">1</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑆</tspan>
+				<tspan style="font-size: 12.50px; " x="11.090161" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="15.25366" y="0">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="23.693186" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="31.320015" y="0">∝</tspan>
+			</text>
+
+			<g>
+				<path d="m 212.47,59.37 32.05,0" style="fill:none;stroke:#000000;stroke-width:0.82499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+			</g>
+			<text transform="matrix(1,0,0,-1,212.47,45.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">4</tspan>
+				<tspan style="font-size: 12.50px; " x="6.2515001" y="0">𝜋</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,226.33,48.94)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,231.2,45.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑓</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,239.64,50.57)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">4</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,245.71,56.25)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="228.41" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="232.5735" y="0">8</tspan>
+				<tspan style="font-size: 12.50px; " x="238.825" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span></p><p>From the above, the power spectral density of the equivalent kernel filter is derived as<span class="displayed-label" id="EEq10"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M48" height="36.112499" version="1.1" viewBox="0 0 700.9375 36.112499" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,36.1125)">
+		<g transform="translate(72,-43.11)">
+			<text transform="matrix(1,0,0,-1,152.52,56.25)">
+				<tspan style="font-size: 12.50px; " x="71.949997" y="-7.25">1</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0">ℎ</tspan>
+				<tspan style="font-size: 12.50px; " x="9.2897291" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="13.453228" y="0">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="21.892754" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="29.532085" y="0">=</tspan>
+			</text>
+
+			<g>
+				<path d="m 195.29,59.37 64.62,0" style="fill:none;stroke:#000000;stroke-width:0.82499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+			</g>
+			<text transform="matrix(1,0,0,-1,195.29,45.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,202.63,48.94)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,207.5,45.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">4</tspan>
+				<tspan style="font-size: 12.50px; " x="6.2515001" y="0">𝜋</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,221.35,48.94)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,226.23,45.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑓</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,234.67,50.57)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">4</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,242.32,45.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="18.790001" y="-10.75">.</tspan>
+				<tspan style="font-size: 12.50px; " x="231.8" y="-10.75">(</tspan>
+				<tspan style="font-size: 12.50px; " x="235.9635" y="-10.75">9</tspan>
+				<tspan style="font-size: 12.50px; " x="242.215" y="-10.75">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span></p><p>In Figure <a target="_blank" href="http://www.hindawi.com/journals/cmmm/2012/578785/fig2/">2</a> it is shown an example of the transfer function of the equivalent kernel filter (with <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.13794pt;width:42.599998px;" id="M49" height="13.9375" version="1.1" viewBox="0 0 42.599998 13.9375" width="42.599998">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.9375)">
+		<g transform="translate(72,-60.85)">
+			<text transform="matrix(1,0,0,-1,-71.95,61.03)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-64.61,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-56.26,61.03)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.027886" y="0">1</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>): the phase is constant zero.</p><div class="fig"><div class="figgroupcaption"><a target="_blank" class="thumbnail" href="http://www.hindawi.com/journals/cmmm/2012/578785/fig2/"><img src="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/578785.fig.002a_th.jpg" alt="fig2" /></a></div><div class="groupcaption"><b>Figure 2: </b>Bode plot of theoretical transfer function of equivalent kernel filter.</div></div><h4 id="sec5">5. Estimation of the Filter Bandwidth</h4><p>Although the approximation in (<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#EEq10">9</a>) is only valid in the limit as the number of data points goes to infinity, it is still useful for calculating the approximate −3 dB bandwidth of the finite-sample approximation of the filter in terms of the smoothing parameter <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.13794pt;width:15.3875px;" id="M50" height="13.9375" version="1.1" viewBox="0 0 15.3875 13.9375" width="15.3875">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.9375)">
+		<g transform="translate(72,-60.85)">
+			<text transform="matrix(1,0,0,-1,-71.95,61.03)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-64.61,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>. Whereas the SPA as presented [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B7">7</a>] does not provide an effective bandwidth estimate but only the qualitative behaviour of the filter, the following approximation provides a quantitative tool.</p><p>Inverting (<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#EEq10">9</a>) and applying the bilinear transformation of the continuous frequencies, we get<span class="displayed-label" id="EEq11"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M51" height="32.799999" version="1.1" viewBox="0 0 700.9375 32.799999" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,32.8)">
+		<g transform="translate(72,-45.76)">
+			<text transform="matrix(1,0,0,-1,120.52,54.57)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,127.86,59.57)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,136.21,54.57)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.04" y="4.9200001"></tspan>
+				<tspan style="font-size: 12.50px; " x="19.4" y="-1.33">√</tspan>
+			</text>
+
+			<g>
+				<path d="m 167.22,67.66 6.25,0" style="fill:none;stroke:#000000;stroke-width:0.82499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+			</g>
+			<text transform="matrix(1,0,0,-1,167.22,54.57)">
+				<tspan style="font-size: 12.50px; " x="69.370003" y="4.9200001"></tspan>
+				<tspan style="font-size: 12.50px; " x="77.93" y="-9.2299995">𝜔</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="9.0146627" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="20.367388" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="26.620001" y="4.9200001"></tspan>
+				<tspan style="font-size: 12.50px; " x="36.297321" y="4.9200001"></tspan>
+				<tspan style="font-size: 12.50px; " x="43.669998" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="51.996998" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="55.472832" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="61.024162" y="0">n</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,253.66,60.68)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑐</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,258.23,63.8)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜋</tspan>
+			</text>
+
+			<g>
+				<path d="m 245.15,57.69 20.68,0" style="fill:none;stroke:#000000;stroke-width:0.82499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+			</g>
+			<text transform="matrix(1,0,0,-1,252.36,45.81)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="14.67" y="-3.8399999"></tspan>
+				<tspan style="font-size: 12.50px; " x="22.271824" y="-3.8399999"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,282.23,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">4</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,293.1,54.57)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="174.77" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="178.9335" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="185.185" y="0">0</tspan>
+				<tspan style="font-size: 12.50px; " x="191.43649" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span>
+					where <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.2316pt;width:16.475px;" id="M52" height="11.05" version="1.1" viewBox="0 0 16.475 11.05" width="16.475">
+	<g transform="matrix(1.25,0,0,-1.25,0,11.05)">
+		<g transform="translate(72,-63.16)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.44)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜔</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-63.44,63.31)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑐</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is the normalised cut-off frequency (namely, the Nyquist frequency = 1).</p><p>Since the number of data points mostly impacts the estimation of low frequencies, the expectation is that the approximation is good in the low-frequency range.</p><p>In a Monte Carlo simulation, 1000 replications of the Welch periodogram estimates were made of white Gaussian noise coloured through the equivalent filter <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:12.2875px;" id="M53" height="10.6875" version="1.1" viewBox="0 0 12.2875 10.6875" width="12.2875">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.6875)">
+		<g transform="translate(72,-63.45)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐇</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>. Each noise sequence was composed of 5000 regularly spaced samples. In Table <a target="_blank" href="http://www.hindawi.com/journals/cmmm/2012/578785/tab1/">1</a>, it is seen that this approximation is good and, predictably, deteriorates as the cut-off frequency increases.</p><div class="fig" id="tab1"><div class="figgroupcaption"><a target="_blank" class="thumbnail" href="http://www.hindawi.com/journals/cmmm/2012/578785/tab1/"><img src="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/578785.tab1_th.jpg" alt="tab1" /></a></div><div class="groupcaption"><b>Table 1: </b>approximation of −3 dB point [Hz].</div></div><p>Figure <a target="_blank" href="http://www.hindawi.com/journals/cmmm/2012/578785/fig3/">3</a> shows the transfer function of the digital equivalent kernel filter.</p><div class="fig"><div class="figgroupcaption"><a target="_blank" class="thumbnail" href="http://www.hindawi.com/journals/cmmm/2012/578785/fig3/"><img src="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/578785.fig.003a_th.jpg" alt="fig3" /></a></div><div class="groupcaption"><b>Figure 3: </b>Bode plot of discrete transfer function of equivalent kernel filter.</div></div><p>There is very little phase distortion, except at very high frequencies close to the Nyquist frequency.</p><h4 id="sec6">6. Illustrative Performance with Synthetic and Real Data Sets</h4><p>A synthetic data set of was generated (MATLAB) as series of normallydistributed random numbers of mean 0.85(1) s (equivalent to a heart rate of ~75 bpm) and std 0.025 s: this was low-pass filtered at 1 Hz (3rd-order phase-less IIR). These data were projected by interpolation, onto an irregular time axis of mean interval 0.86(1) s and variance 0.01s<sup>2</sup>. The resulting synthetic HRV record, as a time record of band-limited Gaussian noise, was of 30 s duration, average sampling frequency of 1.15(6) Hz and had no significant power above 1 Hz.</p><p>Clinical ECG data from a Lead II configuration were recorded from a healthy adult seated for a period of 60 minutes using a Spacelabs Medical Pathfinder Holter system. RR intervals were available with 1 ms resolution.</p><p>The time domain and frequency domain (as the Lomb Scargle periodogram) representations of the synthetic data set and the clinical data set are shown in Figure <a target="_blank" href="http://www.hindawi.com/journals/cmmm/2012/578785/fig4/">4</a> to illustrate the band-pass filtering effect achieved using sequential SGP. The synthetic HRV data and the clinical HRV data are filtered in the band-pass [0.025 <i>⋯</i> 0.5] Hz and [0.025 <i>⋯</i> 0.35] Hz, respectively.</p><div class="fig"><div class="figgroupcaption"><a target="_blank" class="thumbnail" href="http://www.hindawi.com/journals/cmmm/2012/578785/fig4/"><img alt="578785.fig.004" src="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/578785.fig.004_th.jpg" /></a></div><div class="groupcaption"><b>Figure 4: </b>Synthetic and clinical HRV records band-pass filtered by sequential application of SGP: raw data <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.25793pt;width:19.012501px;" id="M54" height="13.05" version="1.1" viewBox="0 0 19.012501 13.05" width="19.012501">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.05)">
+		<g transform="translate(72,-61.56)">
+			<text transform="matrix(1,0,0,-1,-71.95,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="6.3265181" y="0">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-61.71,61.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">0</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> “smoothed” to give <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.13504pt;width:19.012501px;" id="M55" height="12.8875" version="1.1" viewBox="0 0 19.012501 12.8875" width="19.012501">
+	<g transform="matrix(1.25,0,0,-1.25,0,12.8875)">
+		<g transform="translate(72,-61.69)">
+			<text transform="matrix(1,0,0,-1,-71.95,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="6.3265181" y="0">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-61.71,61.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">1</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>; <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.25793pt;width:93.837502px;" id="M56" height="13.05" version="1.1" viewBox="0 0 93.837502 13.05" width="93.837502">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.05)">
+		<g transform="translate(72,-61.56)">
+			<text transform="matrix(1,0,0,-1,-71.95,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="6.3265181" y="0">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-61.71,61.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-53.36,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.027886" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="18.354404" y="0">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-31.09,61.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">0</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-23.43,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="17.666739" y="0">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-1.85,61.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">1</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> (not shown); <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.13504pt;width:19.012501px;" id="M57" height="12.8875" version="1.1" viewBox="0 0 19.012501 12.8875" width="19.012501">
+	<g transform="matrix(1.25,0,0,-1.25,0,12.8875)">
+		<g transform="translate(72,-61.69)">
+			<text transform="matrix(1,0,0,-1,-71.95,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="6.3265181" y="0">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-61.71,61.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> “smoothed” to give <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.25793pt;width:19.012501px;" id="M58" height="13.05" version="1.1" viewBox="0 0 19.012501 13.05" width="19.012501">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.05)">
+		<g transform="translate(72,-61.56)">
+			<text transform="matrix(1,0,0,-1,-71.95,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="6.3265181" y="0">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-61.71,61.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">3</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>. Lomb Scargle Periodograms (LSPs) are for <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.25793pt;width:19.012501px;" id="M59" height="13.05" version="1.1" viewBox="0 0 19.012501 13.05" width="19.012501">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.05)">
+		<g transform="translate(72,-61.56)">
+			<text transform="matrix(1,0,0,-1,-71.95,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="6.3265181" y="0">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-61.71,61.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">0</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>, <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.13504pt;width:19.012501px;" id="M60" height="12.8875" version="1.1" viewBox="0 0 19.012501 12.8875" width="19.012501">
+	<g transform="matrix(1.25,0,0,-1.25,0,12.8875)">
+		<g transform="translate(72,-61.69)">
+			<text transform="matrix(1,0,0,-1,-71.95,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="6.3265181" y="0">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-61.71,61.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>, and <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-3.25793pt;width:19.012501px;" id="M61" height="13.05" version="1.1" viewBox="0 0 19.012501 13.05" width="19.012501">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.05)">
+		<g transform="translate(72,-61.56)">
+			<text transform="matrix(1,0,0,-1,-71.95,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑣</tspan>
+				<tspan style="font-size: 12.50px; " x="6.3265181" y="0">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-61.71,61.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">3</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>.</div></div><h4 id="sec7">7.  Internet Resources and Open-Source Code</h4><p>Resources relevant to this work are located at <a target="_blank" href="http://clinengnhs.liv.ac.uk/links.htm">http://clinengnhs.liv.ac.uk/links.htm</a> and include the following. <span class="list"><span class="list-item"><span class="list-label">(1)</span><span class="list-content">A website demonstration of SGP running on an automation instance of MATLAB 2008a. Developed for JavaScript-enabled MS IE6+ and FireFox browsers.</span></span><span class="list-item"><span class="list-label">(2)</span><span class="list-content">MATLAB open-source code:<span class="list"><span class="list-item"><span class="list-label">(i)</span><span class="list-content">Smoothing by Gaussian process Priors (SGP): gpsmooth_3.m,</span></span><span class="list-item"><span class="list-label">(ii)</span><span class="list-content">Optimized Lomb Scargle Periodogram (fLSPw:<i> fastest Lomb Scargle Periodogram in the West</i>): fLSPw.m.</span></span></span></span></span></span></p><h4 id="sec8">8. Conclusion</h4><p>The SGP (Smoothing by Gaussian process Priors) algorithm is a second-order response time-varying filter which operates on irregularly sampled data without compromising low-frequency fidelity. In the context of Heart Rate Variability analysis, it provides detrending (high-pass) and low-pass filtering with explicitly specified −3 dB cut-off points. A small limitation is the implicit requirement to assume a <i>representative</i> sampling frequency to establish the frequency interval: here this is taken as the reciprocal of the median sampling interval. The SGP MATLAB code is available as open source via a comprehensive website and is directly compatible with an optimised implementation of the Lomb Scargle Periodogram (fLSPw) estimator.</p><h4 class="secapp">Appendices</h4><h4 id="sec9">A. Gaussian Process Interpretation of Smoothing Priors</h4><p>Consider the posterior expectation of a GP regressor (<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#EEq2">2</a>) at a set of training data points <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.17555pt;width:7.9250002px;" id="M62" height="7.375" version="1.1" viewBox="0 0 7.9250002 7.375" width="7.9250002">
+	<g transform="matrix(1.25,0,0,-1.25,0,7.375)">
+		<g transform="translate(72,-66.1)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.32)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>:<span class="displayed-label" id="EEq12"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M63" height="22.775" version="1.1" viewBox="0 0 700.9375 22.775" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,22.775)">
+		<g transform="translate(72,-53.78)">
+			<text transform="matrix(1,0,0,-1,160.27,58.4)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">̂</tspan>
+				<tspan style="font-size: 12.50px; " x="-6.851644" y="0">𝑦</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,159.61,55.27)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,168.72,58.4)">
+				<tspan style="font-size: 12.50px; " x="21.76" y="2.52"></tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.027886" y="0">𝐊</tspan>
+				<tspan style="font-size: 12.50px; " x="27.610001" y="0">𝐊</tspan>
+				<tspan style="font-size: 12.50px; " x="40.112999" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="51.45322" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,227.52,63.4)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,232.4,58.4)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐈</tspan>
+				<tspan style="font-size: 12.50px; " x="4.8600001" y="2.52"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,243.11,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,253.98,58.4)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="6.238997" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="208.05" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="212.2135" y="0">A</tspan>
+				<tspan style="font-size: 12.50px; " x="221.19066" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="224.31641" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="230.5679" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span>
+							where <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:12.2875px;" id="M64" height="10.6875" version="1.1" viewBox="0 0 12.2875 10.6875" width="12.2875">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.6875)">
+		<g transform="translate(72,-63.45)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐊</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is the covariance matrix of the GP <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.29482pt;width:7.875px;" id="M65" height="9.8625002" version="1.1" viewBox="0 0 7.875 9.8625002" width="7.875">
+	<g transform="matrix(1.25,0,0,-1.25,0,9.8625)">
+		<g transform="translate(72,-64.11)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.45)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑦</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> and <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.13794pt;width:9.3000002px;" id="M66" height="6.9875002" version="1.1" viewBox="0 0 9.3000002 6.9875002" width="9.3000002">
+	<g transform="matrix(1.25,0,0,-1.25,0,6.9875)">
+		<g transform="translate(72,-66.41)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.6)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is the standard deviation of the white (Gaussian) noise corrupting the data <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.17555pt;width:7.9250002px;" id="M67" height="7.375" version="1.1" viewBox="0 0 7.9250002 7.375" width="7.9250002">
+	<g transform="matrix(1.25,0,0,-1.25,0,7.375)">
+		<g transform="translate(72,-66.1)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.32)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>. By algebraic manipulation of (<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#EEq12">A.1</a>), it follows:<span class="displayed-label" id="EEq13"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M68" height="57.037498" version="1.1" viewBox="0 0 700.9375 57.037498" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,57.0375)">
+		<g transform="translate(72,-26.37)">
+			<text transform="matrix(1,0,0,-1,89.78,58.23)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">̂</tspan>
+				<tspan style="font-size: 12.50px; " x="-6.8641472" y="0">𝑦</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,89.12,55.1)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,98.22,58.23)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.04" y="2.51"></tspan>
+				<tspan style="font-size: 12.50px; " x="16.82865" y="2.51"></tspan>
+				<tspan style="font-size: 12.50px; " x="22.68" y="0">𝐊</tspan>
+				<tspan style="font-size: 12.50px; " x="35.182999" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="46.52322" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,152.09,63.23)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,156.97,58.23)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐈</tspan>
+				<tspan style="font-size: 12.50px; " x="4.8600001" y="2.51"></tspan>
+				<tspan style="font-size: 12.50px; " x="12.79" y="0">𝐊</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,179.49,63.4)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,190.36,55.72)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,195.15,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,206.02,58.23)">
+				<tspan style="font-size: 12.50px; " x="21.75" y="2.51"></tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="9.7023277" y="0">≡</tspan>
+				<tspan style="font-size: 12.50px; " x="27.6" y="0">𝐊</tspan>
+				<tspan style="font-size: 12.50px; " x="37.327335" y="0">𝐊</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,253.08,63.4)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,266.72,58.23)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="11.340221" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,285.41,63.23)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,290.28,58.23)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐊</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,300.01,63.4)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,310.88,55.72)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,316.73,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,327.6,58.23)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="-229.38" y="27.25">≡</tspan>
+				<tspan style="font-size: 12.50px; " x="-217.34" y="29.76"></tspan>
+				<tspan style="font-size: 12.50px; " x="-211.49001" y="27.25">𝐈</tspan>
+				<tspan style="font-size: 12.50px; " x="-203.85066" y="27.25">+</tspan>
+				<tspan style="font-size: 12.50px; " x="-192.51045" y="27.25">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,142.44,35.98)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,147.31,30.98)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐊</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,157.04,36.15)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,167.91,28.47)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,173.76,38.78)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,184.63,30.98)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="6.238997" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="277.39999" y="-15.08">(</tspan>
+				<tspan style="font-size: 12.50px; " x="281.56351" y="-15.08">A</tspan>
+				<tspan style="font-size: 12.50px; " x="290.54065" y="-15.08">.</tspan>
+				<tspan style="font-size: 12.50px; " x="293.66641" y="-15.08">2</tspan>
+				<tspan style="font-size: 12.50px; " x="299.91791" y="-15.08">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span></p><p>Comparing the above with (<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#EEq3">3</a>),<span class="displayed-label" id="EEq14"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M69" height="19.0875" version="1.1" viewBox="0 0 700.9375 19.0875" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,19.0875)">
+		<g transform="translate(72,-56.73)">
+			<text transform="matrix(1,0,0,-1,173.97,60.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,183,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">T</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,183,56.89)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑑</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,188.84,60.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,197.87,57.74)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝑑</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,207.02,60.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.027886" y="0">𝐊</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,228.79,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">−</tspan>
+				<tspan style="font-size: 8.75px; " x="5.99512" y="0">1</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,239.66,60.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="222.37" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="226.53349" y="0">A</tspan>
+				<tspan style="font-size: 12.50px; " x="235.51065" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="238.6364" y="0">3</tspan>
+				<tspan style="font-size: 12.50px; " x="244.88791" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span>
+							The above derivations show some important facts about the solution of the problem.<span class="list"><span class="list-item"><span class="list-label">(1)</span><span class="list-content">The parameter <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.13794pt;width:9.3000002px;" id="M70" height="6.9875002" version="1.1" viewBox="0 0 9.3000002 6.9875002" width="9.3000002">
+	<g transform="matrix(1.25,0,0,-1.25,0,6.9875)">
+		<g transform="translate(72,-66.41)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.6)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> describes the amount of (Gaussian) white noise, which affects the data. As <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.13794pt;width:9.3000002px;" id="M71" height="6.9875002" version="1.1" viewBox="0 0 9.3000002 6.9875002" width="9.3000002">
+	<g transform="matrix(1.25,0,0,-1.25,0,6.9875)">
+		<g transform="translate(72,-66.41)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.6)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> gets smaller, the filtering process gets smoother.</span></span><span class="list-item"><span class="list-label">(2)</span><span class="list-content">The smoothness properties of the resulting estimator depend not only on <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.13794pt;width:9.3000002px;" id="M72" height="6.9875002" version="1.1" viewBox="0 0 9.3000002 6.9875002" width="9.3000002">
+	<g transform="matrix(1.25,0,0,-1.25,0,6.9875)">
+		<g transform="translate(72,-66.41)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.6)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>, but also on the choice of the covariance matrix <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.0pt;width:12.2875px;" id="M73" height="10.6875" version="1.1" viewBox="0 0 12.2875 10.6875" width="12.2875">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.6875)">
+		<g transform="translate(72,-63.45)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐊</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>. Note that polynomials <i>up to</i> (and including) 1st degree are in the null space of the regularization operator (i.e., they are both mapped to constants), which means that they are not penalized at all. This implies that the Gaussian Process prior is not stationary (see Appendix <a href="http://www.hindawi.com/journals/cmmm/2012/578785/#sec10">B</a> for a definition).</span></span></span></p><h4 id="sec10">B.  Stationarity</h4><p>A Gaussian process is completely described by its mean function and covariance function. Given a real process <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.34499pt;width:24.1px;" id="M74" height="13.6125" version="1.1" viewBox="0 0 24.1 13.6125" width="24.1">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.6125)">
+		<g transform="translate(72,-61.11)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="6.9391651" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="11.102664" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="15.016103" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>, these functions are specified as the following expectations:<span class="displayed-label" id="EEq15"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M75" height="46.1875" version="1.1" viewBox="0 0 700.9375 46.1875" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,46.1875)">
+		<g transform="translate(72,-35.05)">
+			<text transform="matrix(1,0,0,-1,167.05,63.2)">
+				<tspan style="font-size: 12.50px; " x="48.439999" y="0.039999999">[</tspan>
+				<tspan style="font-size: 12.50px; " x="75.360001" y="0.039999999">]</tspan>
+				<tspan style="font-size: 12.50px; " x="81.610001" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="-72.559998" y="23.530001">𝑘</tspan>
+				<tspan style="font-size: 12.50px; " x="-63.689999" y="26.049999"></tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑚</tspan>
+				<tspan style="font-size: 12.50px; " x="10.952628" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="15.116127" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="19.029566" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="26.6689" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="38.70929" y="0">E</tspan>
+				<tspan style="font-size: 12.50px; " x="52.599998" y="0">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="63.115025" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="67.278519" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="71.191963" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="-57.84" y="23.530001">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="-53.926559" y="23.530001">,</tspan>
+				<tspan style="font-size: 12.50px; " x="-48.725311" y="23.530001">𝑡</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,122.24,44.67)">
+				<tspan style="font-size: 8.75px; " x="0" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,125.72,37.15)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="31.08" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="106.37" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="163.67999" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="169.53" y="-2.52">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="9.3199997" y="-2.52">=</tspan>
+				<tspan style="font-size: 12.50px; " x="21.347885" y="-2.52">E</tspan>
+				<tspan style="font-size: 12.50px; " x="35.869999" y="-2.52">(</tspan>
+				<tspan style="font-size: 12.50px; " x="40.033501" y="-2.52">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="50.548523" y="-2.52">(</tspan>
+				<tspan style="font-size: 12.50px; " x="54.712021" y="-2.52">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="58.625462" y="-2.52">)</tspan>
+				<tspan style="font-size: 12.50px; " x="65.564629" y="-2.52">−</tspan>
+				<tspan style="font-size: 12.50px; " x="76.917351" y="-2.52">𝑚</tspan>
+				<tspan style="font-size: 12.50px; " x="87.86998" y="-2.52">(</tspan>
+				<tspan style="font-size: 12.50px; " x="92.033478" y="-2.52">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="95.946915" y="-2.52">)</tspan>
+				<tspan style="font-size: 12.50px; " x="100.11041" y="-2.52">)</tspan>
+				<tspan style="font-size: 12.50px; " x="112.22" y="-2.52">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="122.73502" y="-2.52">(</tspan>
+				<tspan style="font-size: 12.50px; " x="126.89852" y="-2.52">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="130.81197" y="-2.52">′</tspan>
+				<tspan style="font-size: 12.50px; " x="134.42532" y="-2.52">)</tspan>
+				<tspan style="font-size: 12.50px; " x="141.36449" y="-2.52">−</tspan>
+				<tspan style="font-size: 12.50px; " x="152.71722" y="-2.52">𝑚</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,299.17,44.67)">
+				<tspan style="font-size: 8.75px; " x="0" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,302.64,37.15)">
+				<tspan style="font-size: 12.50px; " x="18.57" y="-2.52">.</tspan>
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="5.8514042" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="11.702808" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="160.02" y="-13.25">(</tspan>
+				<tspan style="font-size: 12.50px; " x="164.1835" y="-13.25">B</tspan>
+				<tspan style="font-size: 12.50px; " x="172.52299" y="-13.25">.</tspan>
+				<tspan style="font-size: 12.50px; " x="175.64874" y="-13.25">1</tspan>
+				<tspan style="font-size: 12.50px; " x="181.90025" y="-13.25">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span>
+							For a fixed <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.11285pt;width:5.0124998px;" id="M76" height="9.125" version="1.1" viewBox="0 0 5.0124998 9.125" width="5.0124998">
+	<g transform="matrix(1.25,0,0,-1.25,0,9.125)">
+		<g transform="translate(72,-64.7)">
+			<text transform="matrix(1,0,0,-1,-71.95,64.86)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑡</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>, <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.34499pt;width:24.1px;" id="M77" height="13.6125" version="1.1" viewBox="0 0 24.1 13.6125" width="24.1">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.6125)">
+		<g transform="translate(72,-61.11)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="6.9391651" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="11.102664" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="15.016103" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> is a Gaussian random variable with mean <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.21957pt;width:26.525px;" id="M78" height="13.45" version="1.1" viewBox="0 0 26.525 13.45" width="26.525">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.45)">
+		<g transform="translate(72,-61.24)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑚</tspan>
+				<tspan style="font-size: 12.50px; " x="8.8771296" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="13.040629" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="16.954067" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> and variance <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.21957pt;width:40.512501px;" id="M79" height="13.45" version="1.1" viewBox="0 0 40.512501 13.45" width="40.512501">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.45)">
+		<g transform="translate(72,-61.24)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑘</tspan>
+				<tspan style="font-size: 12.50px; " x="6.7766261" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="10.940125" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="14.853564" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="24.218311" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="28.13175" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>, so that a Gaussian process can be defined as a collection of random variables, any finite number of which have a joint Gaussian distribution.</p><p>A stationary covariance function is a function of <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.11285pt;width:32.075001px;" id="M80" height="10.8625" version="1.1" viewBox="0 0 32.075001 10.8625" width="32.075001">
+	<g transform="matrix(1.25,0,0,-1.25,0,10.8625)">
+		<g transform="translate(72,-63.31)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.47)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="6.689105" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="18.029325" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="21.942764" y="0">′</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>, that is, it is invariant to translations. The above definitions can be used to define stationarity for Gaussian processes. A process which has constant mean and whose covariance function is stationary is called <i>weakly stationary </i>(or<i> wide-sense stationary, WSS</i>). A process whose joint distributions are invariant to translations, that is, the statistics of <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.34499pt;width:24.1px;" id="M81" height="13.6125" version="1.1" viewBox="0 0 24.1 13.6125" width="24.1">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.6125)">
+		<g transform="translate(72,-61.11)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="6.9391651" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="11.102664" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="15.016103" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> and <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.34499pt;width:48.237499px;" id="M82" height="13.6125" version="1.1" viewBox="0 0 48.237499 13.6125" width="48.237499">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.6125)">
+		<g transform="translate(72,-61.11)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.5)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑓</tspan>
+				<tspan style="font-size: 12.50px; " x="6.9391651" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="11.102664" y="0">𝑡</tspan>
+				<tspan style="font-size: 12.50px; " x="17.791769" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="29.13199" y="0">𝑐</tspan>
+				<tspan style="font-size: 12.50px; " x="34.320736" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> are the same for any <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.13794pt;width:7.3874998px;" id="M83" height="7.1875" version="1.1" viewBox="0 0 7.3874998 7.1875" width="7.3874998">
+	<g transform="matrix(1.25,0,0,-1.25,0,7.1875)">
+		<g transform="translate(72,-66.25)">
+			<text transform="matrix(1,0,0,-1,-71.95,66.44)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑐</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>, is called <i>strictly stationary </i>(or<i> strict-sense stationary, SSS</i>). It can be shown that as SSS process is also WSS, and if the process is Gaussian, then the converse is also true.</p><p>If any of the above conditions are violated, then the process is non-stationary; an example is the Gaussian process whose inverse covariance matrix is given by (<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#EEq6">4</a>) and (<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#EEq7">5</a>).</p><h4 id="sec11">C. Improving the Speed and Stability of the SPA Smoothing Process</h4><p>In general, matrix inversion is very computationally expensive and should be avoided whenever possible A more efficient solution uses the <i>backslash</i> operator <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.78387pt;width:8.3000002px;" id="M84" height="14.6875" version="1.1" viewBox="0 0 8.3000002 14.6875" width="8.3000002">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.6875)">
+		<g transform="translate(72,-60.25)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.07)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">⧵</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>, which in MATLAB implements the solution of a linear system by Gaussian elimination. However, the matrix <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-4.05913pt;width:85.5px;" id="M85" height="18.887501" version="1.1" viewBox="0 0 85.5 18.887501" width="85.5">
+	<g transform="matrix(1.25,0,0,-1.25,0,18.8875)">
+		<g transform="translate(72,-56.89)">
+			<text transform="matrix(1,0,0,-1,-71.95,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="4.1634989" y="0">𝐈</tspan>
+				<tspan style="font-size: 12.50px; " x="11.802832" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="23.143053" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-41.46,65.99)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-36.59,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-27.56,66.16)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">T</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-27.56,56.94)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-21.71,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-12.69,57.86)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-7.81,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> can be nearly singular and ill conditioned, depending on values of the parameter <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.13794pt;width:15.3875px;" id="M86" height="13.9375" version="1.1" viewBox="0 0 15.3875 13.9375" width="15.3875">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.9375)">
+		<g transform="translate(72,-60.85)">
+			<text transform="matrix(1,0,0,-1,-71.95,61.03)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-64.61,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>. To circumvent this risk, the lower Cholesky factor <b>L</b> (the <i>square root</i>) of this matrix is derived, so that<span class="displayed-label" id="EEq4"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M87" height="19.5375" version="1.1" viewBox="0 0 700.9375 19.5375" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,19.5375)">
+		<g transform="translate(72,-56.37)">
+			<text transform="matrix(1,0,0,-1,150.91,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐋</tspan>
+				<tspan style="font-size: 12.50px; " x="8.3395014" y="0">𝐋</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,167.59,66.16)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">T</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,176.91,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.04" y="2.52"></tspan>
+				<tspan style="font-size: 12.50px; " x="17.889999" y="0">𝐈</tspan>
+				<tspan style="font-size: 12.50px; " x="25.529333" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="36.869553" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,221.13,65.99)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,226,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,235.03,66.16)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">T</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,235.03,56.94)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,240.87,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝐃</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,249.9,57.86)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,254.78,58.47)">
+				<tspan style="font-size: 12.50px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 12.50px; " x="7.9299998" y="-2.52">.</tspan>
+				<tspan style="font-size: 12.50px; " x="207.88" y="-2.52">(</tspan>
+				<tspan style="font-size: 12.50px; " x="212.0435" y="-2.52">C</tspan>
+				<tspan style="font-size: 12.50px; " x="220.383" y="-2.52">.</tspan>
+				<tspan style="font-size: 12.50px; " x="223.50874" y="-2.52">1</tspan>
+				<tspan style="font-size: 12.50px; " x="229.76025" y="-2.52">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span></p><p>With this decomposition, matrix inversion can then simply be written as the solution, in sequence, of two triangular systems of linear equations, which is a very fast and numerically stable operation:<span class="displayed-label" id="EEq5"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin" style="vertical-align:-0pt;width:700.9375px;" id="M88" height="18.512501" version="1.1" viewBox="0 0 700.9375 18.512501" width="700.9375">
+	<g transform="matrix(1.25,0,0,-1.25,0,18.5125)">
+		<g transform="translate(72,-57.19)">
+			<text transform="matrix(1,0,0,-1,167.28,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">̂</tspan>
+				<tspan style="font-size: 12.50px; " x="-6.8641472" y="0">𝑦</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,166.61,57.86)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,175.72,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="12.040389" y="0">𝐋</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,196.1,66.16)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">T</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,204.73,60.99)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">⧵</tspan>
+				<tspan style="font-size: 12.50px; " x="11.390233" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="15.553732" y="0">𝐋</tspan>
+				<tspan style="font-size: 12.50px; " x="26.6689" y="0">⧵</tspan>
+				<tspan style="font-size: 12.50px; " x="35.983635" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="42.22263" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="48.474133" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="257.92999" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="262.09351" y="0">C</tspan>
+				<tspan style="font-size: 12.50px; " x="270.43301" y="0">.</tspan>
+				<tspan style="font-size: 12.50px; " x="273.55875" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="279.81024" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span></p><p>Although the theoretical computational complexity of straight matrix inversion and the above (seemingly more complex) steps is the same, the <i>hidden factors</i> of the actual numerical computations make a very significant difference [<a href="http://www.hindawi.com/journals/cmmm/2012/578785/#B10">9</a>]. The speed-up is illustrated by performing the above computations on a sequence of varying length (from 1000 to 3000 samples), repeating the execution of both algorithms 100 times. Figure <a target="_blank" href="http://www.hindawi.com/journals/cmmm/2012/578785/fig5/">5</a> shows the speed-up as a function of the data set size.</p><div class="fig"><div class="figgroupcaption"><a target="_blank" class="thumbnail" href="http://www.hindawi.com/journals/cmmm/2012/578785/fig5/"><img alt="578785.fig.005" src="./An Efficient Time-Varying Filter for Detrending and Bandwidth Limiting HRV_files/578785.fig.005_th.jpg" /></a></div><div class="groupcaption"><b>Figure 5: </b>Speed-up of SGP over SPA with increasing data set size.</div></div><p>It is clear that, as the dimension of the data set increases, the speed-up increases quadratically, showing the inefficiency of the matrix inversion-based smoothing. The following code (MATLAB R006b) was used:<span class="list"><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.7337pt;width:86.462502px;" id="M89" height="14.2" version="1.1" viewBox="0 0 86.462502 14.2" width="86.462502">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.2)">
+		<g transform="translate(72,-60.64)">
+			<text transform="matrix(1,0,0,-1,-71.95,63.41)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">T</tspan>
+				<tspan style="font-size: 12.50px; " x="11.102664" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="23.143053" y="0">l</tspan>
+				<tspan style="font-size: 12.50px; " x="26.618887" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="32.170219" y="0">n</tspan>
+				<tspan style="font-size: 12.50px; " x="38.421719" y="0">g</tspan>
+				<tspan style="font-size: 12.50px; " x="44.673218" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="48.249077" y="0">h</tspan>
+				<tspan style="font-size: 12.50px; " x="54.500576" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="58.664078" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="64.903076" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+								</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.7337pt;width:362px;" id="M90" height="14.9375" version="1.1" viewBox="0 0 362 14.9375" width="362">
+	<g transform="matrix(1.25,0,0,-1.25,0,14.9375)">
+		<g transform="translate(72,-60.05)">
+			<text transform="matrix(1,0,0,-1,-71.95,62.83)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">D</tspan>
+				<tspan style="font-size: 12.50px; " x="9.0271664" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="18.741997" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="30.782387" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="35.646053" y="0">p</tspan>
+				<tspan style="font-size: 12.50px; " x="41.897552" y="0">d</tspan>
+				<tspan style="font-size: 12.50px; " x="48.149052" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="51.624886" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="57.17622" y="0">g</tspan>
+				<tspan style="font-size: 12.50px; " x="63.427719" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="68.291389" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="72.454887" y="0">o</tspan>
+				<tspan style="font-size: 12.50px; " x="78.706383" y="0">n</tspan>
+				<tspan style="font-size: 12.50px; " x="84.957886" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="90.509216" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="95.372887" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="99.536385" y="0">T</tspan>
+				<tspan style="font-size: 12.50px; " x="109.95139" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="121.2916" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="127.5556" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="132.75685" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="139.00835" y="0">)</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,73.32,67.83)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">∗</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,78.39,62.83)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">[</tspan>
+				<tspan style="font-size: 12.50px; " x="4.1634989" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="17.354164" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="28.694386" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="39.121887" y="0">1</tspan>
+				<tspan style="font-size: 12.50px; " x="45.373386" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="54.750637" y="0">0</tspan>
+				<tspan style="font-size: 12.50px; " x="66.553467" y="0">∶</tspan>
+				<tspan style="font-size: 12.50px; " x="78.50634" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="84.757835" y="0">]</tspan>
+				<tspan style="font-size: 12.50px; " x="88.921333" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="94.122581" y="0">T</tspan>
+				<tspan style="font-size: 12.50px; " x="104.53758" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="115.8903" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="122.14181" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="127.34306" y="0">T</tspan>
+				<tspan style="font-size: 12.50px; " x="134.98239" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+								</span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.7337pt;width:526.97498px;" id="M91" height="16.174999" version="1.1" viewBox="0 0 526.97498 16.174999" width="526.97498">
+	<g transform="matrix(1.25,0,0,-1.25,0,16.175)">
+		<g transform="translate(72,-59.06)">
+			<text transform="matrix(1,0,0,-1,-71.95,61.84)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">L</tspan>
+				<tspan style="font-size: 12.50px; " x="11.102664" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="23.143053" y="0">c</tspan>
+				<tspan style="font-size: 12.50px; " x="28.50684" y="0">h</tspan>
+				<tspan style="font-size: 12.50px; " x="34.758339" y="0">o</tspan>
+				<tspan style="font-size: 12.50px; " x="41.009838" y="0">l</tspan>
+				<tspan style="font-size: 12.50px; " x="44.485676" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="48.649174" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="53.51284" y="0">p</tspan>
+				<tspan style="font-size: 12.50px; " x="59.764339" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="65.053108" y="0">y</tspan>
+				<tspan style="font-size: 12.50px; " x="71.017036" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="76.568375" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="80.731873" y="0">T</tspan>
+				<tspan style="font-size: 12.50px; " x="88.371201" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="95.297867" y="0">+</tspan>
+				<tspan style="font-size: 12.50px; " x="106.63808" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="111.50175" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="114.97758" y="0">g</tspan>
+				<tspan style="font-size: 12.50px; " x="121.22909" y="0">m</tspan>
+				<tspan style="font-size: 12.50px; " x="130.95642" y="0">a</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,66.66,66.84)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">∧</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,72.58,61.84)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,80.92,66.84)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">∗</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,85.99,61.84)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">D</tspan>
+				<tspan style="font-size: 12.50px; " x="9.0271664" y="0">2</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,101.27,67.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0"></tspan>
+				<tspan style="font-size: 8.75px; " x="5.5599999" y="0.17">∗</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,111.9,61.84)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">D</tspan>
+				<tspan style="font-size: 12.50px; " x="9.0271664" y="0">2</tspan>
+				<tspan style="font-size: 12.50px; " x="15.278666" y="0">,</tspan>
+				<tspan style="font-size: 12.50px; " x="20.479914" y="0">`</tspan>
+				<tspan style="font-size: 12.50px; " x="24.643414" y="0">l</tspan>
+				<tspan style="font-size: 12.50px; " x="28.119247" y="0">o</tspan>
+				<tspan style="font-size: 12.50px; " x="34.108185" y="0">w</tspan>
+				<tspan style="font-size: 12.50px; " x="42.910297" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="48.461628" y="0">r</tspan>
+				<tspan style="font-size: 12.50px; " x="52.625126" y="0">'</tspan>
+				<tspan style="font-size: 12.50px; " x="57.988914" y="0">)</tspan>
+				<tspan style="font-size: 12.50px; " x="62.152412" y="0">;</tspan>
+				<tspan style="font-size: 12.50px; " x="71.879745" y="0">%</tspan>
+				<tspan style="font-size: 12.50px; " x="85.395493" y="0">w</tspan>
+				<tspan style="font-size: 12.50px; " x="94.085075" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="99.636406" y="0">r</tspan>
+				<tspan style="font-size: 12.50px; " x="104.04996" y="0">n</tspan>
+				<tspan style="font-size: 12.50px; " x="110.30147" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="113.7773" y="0">n</tspan>
+				<tspan style="font-size: 12.50px; " x="120.0288" y="0">g</tspan>
+				<tspan style="font-size: 12.50px; " x="126.2803" y="0">:</tspan>
+				<tspan style="font-size: 12.50px; " x="133.91963" y="0">p</tspan>
+				<tspan style="font-size: 12.50px; " x="140.17113" y="0">o</tspan>
+				<tspan style="font-size: 12.50px; " x="146.33511" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="149.81094" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="155.36227" y="0">n</tspan>
+				<tspan style="font-size: 12.50px; " x="161.61378" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="165.08961" y="0">i</tspan>
+				<tspan style="font-size: 12.50px; " x="168.56544" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="174.11678" y="0">l</tspan>
+				<tspan style="font-size: 12.50px; " x="181.74361" y="0">b</tspan>
+				<tspan style="font-size: 12.50px; " x="187.9951" y="0">o</tspan>
+				<tspan style="font-size: 12.50px; " x="194.15909" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="197.63492" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="201.11075" y="0">l</tspan>
+				<tspan style="font-size: 12.50px; " x="204.58659" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="210.13792" y="0">n</tspan>
+				<tspan style="font-size: 12.50px; " x="216.38942" y="0">e</tspan>
+				<tspan style="font-size: 12.50px; " x="221.94075" y="0">c</tspan>
+				<tspan style="font-size: 12.50px; " x="227.21703" y="0">k</tspan>
+				<tspan style="font-size: 12.50px; " x="233.46852" y="0">!</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg></span></span><span class="list-item"><span class="list-label" /><span class="list-content"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-2.78387pt;width:154.2px;" id="M92" height="16.025" version="1.1" viewBox="0 0 154.2 16.025" width="154.2">
+	<g transform="matrix(1.25,0,0,-1.25,0,16.025)">
+		<g transform="translate(72,-59.18)">
+			<text transform="matrix(1,0,0,-1,-71.95,62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="6.238997" y="0">_</tspan>
+				<tspan style="font-size: 12.50px; " x="12.490497" y="0">s</tspan>
+				<tspan style="font-size: 12.50px; " x="17.254141" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="20.842501" y="0">a</tspan>
+				<tspan style="font-size: 12.50px; " x="26.393833" y="0">t</tspan>
+				<tspan style="font-size: 12.50px; " x="33.345501" y="0">=</tspan>
+				<tspan style="font-size: 12.50px; " x="45.385891" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="54.400555" y="0">−</tspan>
+				<tspan style="font-size: 12.50px; " x="65.740776" y="0">L</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,1.44,67.01)">
+				<tspan style="font-size: 8.75px; " x="0" y="0"></tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,7.7,62)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">⧵</tspan>
+				<tspan style="font-size: 12.50px; " x="9.3022318" y="0">(</tspan>
+				<tspan style="font-size: 12.50px; " x="13.465731" y="0">L</tspan>
+				<tspan style="font-size: 12.50px; " x="23.893232" y="0">⧵</tspan>
+				<tspan style="font-size: 12.50px; " x="33.20797" y="0">𝑧</tspan>
+				<tspan style="font-size: 12.50px; " x="39.446964" y="0">)</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg>;
+								</span></span></span></p><p>It should be noted that in MATLAB R2006a, and possibly previous versions, multiplication of the <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:-0.13794pt;width:15.3875px;" id="M93" height="13.9375" version="1.1" viewBox="0 0 15.3875 13.9375" width="15.3875">
+	<g transform="matrix(1.25,0,0,-1.25,0,13.9375)">
+		<g transform="translate(72,-60.85)">
+			<text transform="matrix(1,0,0,-1,-71.95,61.03)">
+				<tspan style="font-size: 12.50px; " x="0" y="0">𝜎</tspan>
+			</text>
+
+			<text transform="matrix(1,0,0,-1,-64.61,66.03)">
+				<tspan style="font-size: 8.75px; " x="0" y="0">2</tspan>
+			</text>
+
+		</g>
+	</g>
+</svg> coefficient by the sparse matrix is anomalously a very slow operation.</p></div></div><div class="xml-content"><h4>References</h4>
+    <ol>
+
+<li id="B1">G. B. Moody, “Spectral analysis of heart rate without resampling,” in <i>Proceedings of the IEEE Conference on Computers in Cardiology</i>, pp. 715–718, London, UK, September 1993.<span class="reflinks"> <a href="http://www.scopus.com/scopus/inward/record.url?eid=2-s2.0-0027809531&partnerID=K84CvKBR&rel=3.0.0&md5=b731c119d671e4ad2d47ac6d260f0d02" target="blank">View at Scopus</a></span></li><li id="B2">M. Malik, A. J. Camm, J. T. Bigger Jr. et al., “Heart rate variability. Standards of measurement, physiological interpretation, and clinical use,” <i>European Heart Journal</i>, vol. 17, no. 3, pp. 354–381, 1996.<span class="reflinks"> </span></li><li id="B3">G. D. Clifford, “ECG statistics, noise, artifacts, and missing data,” in <i>Advanced Methods for ECG Analysis</i>, G. D. Clifford, F. Azuaje, and P. E. McSharry, Eds., pp. 55–93, Artech-House, Boston, Mass, USA, 2006.<span class="reflinks"> </span></li><li id="B4">D. A. Litvack, T. F. Oberlander, L. H. Carney, and J. P. Saul, “Time and frequency domain methods for heart rate variability analysis: a methodological comparison,” <i>Psychophysiology</i>, vol. 32, no. 5, pp. 492–504, 1995.<span class="reflinks"> <a href="http://dx.doi.org/10.1111/j.1469-8986.1995.tb02101.x" target="blank">View at Publisher</a><span class="sep"> · </span><a href="http://scholar.google.com/scholar?q=http://dx.doi.org/10.1111/j.1469-8986.1995.tb02101.x" target="blank">View at Google Scholar</a><span class="sep"> · </span><a href="http://www.scopus.com/scopus/inward/record.url?eid=2-s2.0-0029090186&partnerID=K84CvKBR&rel=3.0.0&md5=4d3025015157b667728ea485e528298b" target="blank">View at Scopus</a></span></li><li id="B5">I. P. Mitov, “A method for assessment and processing of biomedical signals containing trend and periodic components,” <i>Medical Engineering and Physics</i>, vol. 20, no. 9, pp. 660–668, 1998.<span class="reflinks"> <a href="http://dx.doi.org/10.1016/S1350-4533(98)00077-0" target="blank">View at Publisher</a><span class="sep"> · </span><a href="http://scholar.google.com/scholar?q=http://dx.doi.org/10.1016/S1350-4533(98)00077-0" target="blank">View at Google Scholar</a><span class="sep"> · </span><a href="http://www.scopus.com/scopus/inward/record.url?eid=2-s2.0-0032216160&partnerID=K84CvKBR&rel=3.0.0&md5=1cb7fda195fc3859e7799f9acea968c2" target="blank">View at Scopus</a></span></li><li id="B6">S. Porges and R. Bohrer, “The analysis of periodic processes in psychophysiological research,” in <i>Principles of Psychophysiology Physical Social and Inferential Elements</i>, J. Cacioppo and L. Tassinary, Eds., pp. 703–753, Cambridge University Press, 1990.<span class="reflinks"> </span></li><li id="B7">M. P. Tarvainen, P. O. Ranta-aho, and P. A. Karjalainen, “An advanced detrending method with application to HRV analysis,” <i>IEEE Transactions on Biomedical Engineering</i>, vol. 49, no. 2, pp. 172–175, 2002.<span class="reflinks"> <a href="http://dx.doi.org/10.1109/10.979357" target="blank">View at Publisher</a><span class="sep"> · </span><a href="http://scholar.google.com/scholar?q=http://dx.doi.org/10.1109/10.979357" target="blank">View at Google Scholar</a><span class="sep"> · </span><a href="http://www.ncbi.nlm.nih.gov/pubmed/12066885?dopt=AbstractPlus" target="blank">View at PubMed</a><span class="sep"> · </span><a href="http://www.scopus.com/scopus/inward/record.url?eid=2-s2.0-0036157955&partnerID=K84CvKBR&rel=3.0.0&md5=e116c774e099a0e4d997f1da057ea4dd" target="blank">View at Scopus</a></span></li><li id="B8">J. P. Niskanen, M. P. Tarvainen, P. O. Ranta-Aho, and P. A. Karjalainen, “Software for advanced HRV analysis,” <i>Computer Methods and Programs in Biomedicine</i>, vol. 76, no. 1, pp. 73–81, 2004.<span class="reflinks"> <a href="http://dx.doi.org/10.1016/j.cmpb.2004.03.004" target="blank">View at Publisher</a><span class="sep"> · </span><a href="http://scholar.google.com/scholar?q=http://dx.doi.org/10.1016/j.cmpb.2004.03.004" target="blank">View at Google Scholar</a><span class="sep"> · </span><a href="http://www.ncbi.nlm.nih.gov/pubmed/15313543?dopt=AbstractPlus" target="blank">View at PubMed</a><span class="sep"> · </span><a href="http://www.scopus.com/scopus/inward/record.url?eid=2-s2.0-4143147430&partnerID=K84CvKBR&rel=3.0.0&md5=5a334b2d016f8c2094dd335d8fb0d6ca" target="blank">View at Scopus</a></span></li><li id="B10">F. Gustafsson, “Determining the initial states in forward-backward filtering,” <i>IEEE Transactions on Signal Processing</i>, vol. 44, no. 4, pp. 988–992, 1996.<span class="reflinks"> <a href="http://www.scopus.com/scopus/inward/record.url?eid=2-s2.0-0030128465&partnerID=K84CvKBR&rel=3.0.0&md5=abdddbe4d3e342396db3692f02498a86" target="blank">View at Scopus</a></span></li></ol></div>
+            </div>
+            <!--End middle content-->
+            <div class="lock">
+            </div>
+        </div>
+        <div class="footer_space">
+        </div>
+    </div>
+    <div id="footer">
+    </div>   
+    <script type="text/javascript">
+        //<![CDATA[
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker('UA-8578054-2');
+            pageTracker._trackPageview();
+        } catch (err) { }
+        //]]>
+    </script>
+</body>
+</html>

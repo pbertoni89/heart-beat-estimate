@@ -1,0 +1,33 @@
+//------------------------------------------------------------------------------------------------------------------------------
+void detrend(Mat& Mdtr, Mat& M, bool last) {
+
+	int dim = M.cols;
+
+	Mat I = Mat::eye(dim, dim, TYPEMAT1CH);  
+	Mat D2 = Mat::zeros(dim, dim, TYPEMAT1CH) + I; 
+	double *p;
+
+	#if VERBOSE >= 1
+		cout<<"Detrending Channels."<<endl;
+	#endif
+
+	// cycle CORRECT, this is the right D2 (two-order differential matrix)
+	for (int i=0; i < dim-1; i++) {
+		p = D2.ptr<double>(i); 
+		p[i+1] -= 2;
+		if (i < dim-2) {
+			p[i+2] += 1;
+		}
+	}
+
+	// Tarvainen detrending close formula.
+	Mdtr = (I -( I -( (SMOOTH^2) * D2.t() * D2 )).inv(DECOMP_SVD)) * M.t();
+	Mdtr = Mdtr.t();
+
+	#if HUNGRY >= 0
+		if(last) {
+			I.release();
+			D2.release();
+		}
+	#endif
+}

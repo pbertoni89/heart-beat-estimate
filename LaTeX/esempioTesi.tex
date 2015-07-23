@@ -1,0 +1,33 @@
+\documentclass{TesiDiaUniroma3}
+
+\titolo{Acquisizione del battito cardiaco mediante tecniche fotopletismografiche e strumentazione non dedicata}
+\autore{Patrizio Giuliano Bertoni}
+\matricola{79021}
+\relatore{Ing. Nicola Adami}
+\annoAccademico{2011/2012}
+\dedica{A Leo Stefanini}
+
+\begin{document}
+% ----- Pagine di frontespizio, numerate in romano (i,ii,iii,iv...)
+\frontmatter
+	\generaFrontespizio
+	\generaDedica
+	\generaIndice
+	%\generaIndiceFigure
+% ----- Pagine di tesi, numerate in arabo (1,2,3,t4,...)
+\mainmatter
+	\capitolo{Introduzione}{capitoli/introduzione}
+	\capitolo{Elementi di teoria}{capitoli/elementi-teoria}
+	\capitolo{Acquisizione del battito cardiaco}{capitoli/acquisizione}
+	\capitolo{Risultati sperimentali}{capitoli/risultati}
+	\capitolo{Conclusioni e sviluppi futuri}{capitoli/conclusioni}
+% ----- Parte finale della tesi
+\backmatter
+	\appendiceA{Supporto informatico}{appendici/supporto-informatico}
+	\appendiceB{Parametri di programma}{appendici/parametri}
+	\appendiceC{Note sulla portabilità}{appendici/portabilita}
+%	\conclusioni{conclusioni}
+	\ringraziamenti{ringraziamenti}
+	%\bibliography   FIXARE POICHE' NON RICONOSCE [?] 
+	\input{esempioTesi.bbl}
+\end{document}

@@ -1,0 +1,69 @@
+\begin{thebibliography}{IEEE:SPLINE}
+
+\bibitem{POH11}
+Ming-Zher Poh, Daniel J.McDuff and Rosalind W.Picard,
+\newblock {\em Advancements in noncontact, multiparameter physiological measurements using a webcam}
+\newblock IEEE Transactions on biomedical engineering, vol.58, no.1,January 2011.
+
+\bibitem{VER08}
+W. Verkruysse, L. O. Svaasand, and J. S. Nelson, 
+\newblock {\em Remote plethysmo-graphic imaging using ambient light}, 
+\newblock Opt. Expr.,vol.16,pp.21434–21445, Dec. 2008
+
+\bibitem{TAR}
+Mika P.Tarvainen, Perttu O.Ranta-aho and Pasi A.Karjalainen,
+\newblock {\em An advanced detrending method with application to HRV analysis}.
+
+\bibitem{URL:ICA}
+Ruye Wang,
+\newblock {\em Non-Gaussianity is Indipendence},
+\newblock \url{http://fourier.eng.hmc.edu/e161/lectures/ica/node3.html}
+
+\bibitem{TDS:LEO}
+R.Leonardi and P.Migliorati,
+\newblock {\em Esercizi di Teoria dei Segnali}
+\newblock Società Editrice Esculapio, 2011, III Ed.
+
+\bibitem{TDS:HILL}
+M.Luise, G.M.Vitetta,
+\newblock {\em Teoria dei Segnali}
+\newblock McGraw-Hill, 2003, II Ed.
+
+\bibitem{CARD}
+J.Cardoso,
+\newblock {\em Blind source separation and indipendent component analysis},
+\newblock \url{http://perso.telecom-paristech.fr/~cardoso/guidesepsou.html}
+
+\bibitem{OLSFIT}
+Thomas Banchoff,
+\newblock {\em Least Squares Fit},
+\newblock \url{http://www.geom.uiuc.edu/~banchoff/linalg/linalg.html}
+
+\bibitem{IEEE:SPLINE}
+Larry Horowitz,
+\newblock {\em The effects of spline interpolation on Power Spectral Density},
+\newblock IEEE Transactions on acoustics, speech and signal processing,
+\newblock vol. ASSP-22, no. 1, February 1974,
+\newblock \url{http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=01162536}
+
+\bibitem{GIV}
+Julien Dompierre,
+\newblock {\em Householder Reflections and Givens Rotation},
+\newblock \url{http://www.cs.laurentian.ca/jdompierre/html/CPSC5006E_F2010/cours/ch05_Householder_Givens.pdf}
+
+\bibitem{MATLAB}
+\newblock {\em Matlab: il linguaggio del calcolo tecnico},
+\newblock \url{http://www.mathworks.it/products/matlab/}
+
+\bibitem{MATLABC}
+\newblock {\em Interface Matlab code with C, C++ and Fortran},
+\newblock \url{http://www.mathworks.it/support/compilers/interface.html}
+
+\bibitem{FFTW}
+\newblock {\em FFTW: Introduction},
+\newblock \url{http://www.fftw.org}
+
+\bibitem{WIKI}
+Wikipedia.
+
+\end{thebibliography}

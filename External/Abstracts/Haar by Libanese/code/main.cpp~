@@ -1,0 +1,65 @@
+/**
+ *  Lab4: Face-Detection
+ *  @author Fabrizio Pedersoli 72816
+ *  @author Mohmad Farran 73606
+ *  @file main.cpp
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <cassert>
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
+#include <opencv/cxcore.h>
+
+int main (int argc, char *argv[])
+{
+  char *file = argv[1];
+  char win[] = "Haar window";
+
+  IplImage *pInpImg;
+  CvHaarClassifierCascade *pCascade = 0;
+  CvMemStorage *pStorage = 0;
+  CvSeq *pFaceRectSeq;
+  int i;
+
+  pInpImg = cvLoadImage(file, 1);
+  pStorage = cvCreateMemStorage(0);
+  pCascade = cvLoadHaarClassifierCascade("/Users/fab/mylibs/share/opencv/haarcascades/haarcascade_frontalface_alt2.xml", cvSize(50,50));
+
+  if (!pInpImg || !pStorage || !pCascade)
+    {
+      fprintf(stderr, "Unalbe to laod something :)\n");
+      exit(-1);
+    }
+
+  pFaceRectSeq = cvHaarDetectObjects (pInpImg, pCascade, pStorage,
+				      1.1,
+				      2,
+				      CV_HAAR_DO_CANNY_PRUNING,
+				      cvSize(200,200));
+ 
+   
+  for (i=0; i<(pFaceRectSeq? pFaceRectSeq->total:0); i++)
+    {
+      CvRect *r = (CvRect*)cvGetSeqElem(pFaceRectSeq, i);
+      CvPoint pt1 = {r->x, r->y};
+      CvPoint pt2 = {r->x + r->width, r->y + r->height};
+      cvRectangle(pInpImg, pt1, pt2, CV_RGB(0,255,0), 3, 3, 0);
+    }
+
+  cvNamedWindow(win, CV_WINDOW_AUTOSIZE);
+  cvShowImage(win, pInpImg);
+  cvWaitKey(0);
+  cvDestroyWindow(win);
+
+  cvReleaseImage(&pInpImg);
+  cvReleaseHaarClassifierCascade(&pCascade);
+  cvReleaseMemStorage(&pStorage);
+
+  return 0;
+}
+
+
+
+

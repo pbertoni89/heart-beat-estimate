@@ -1,0 +1,7 @@
+\section{Ambiente di sviluppo}
+Inizialmente si è optato per lavorare in un sistema operativo Linux x86, ma a causa di numerosi problemi nella compilazione di OpenCV il laureando si è spostato in ambiente Windows 7 x86. Il codice è stato sviluppato, testato e compilato in {\em Visual Studio 2010}.
+L'elemento che ha influenzato maggiormente la scelta è la possibilità del linking del proprio codice con numerose dll (dynamic linked library) esterne anzichè dover compilarne i sorgenti da zero. Questo chiaramente rende il codice non portabile fuori dall'ambiente Windows. \\
+
+Headers propri di Visual Studio inoltre sono stati utilizzati per il calcolo dell'fps in acquisizione. Questo dato è fondamentale per il processing, perchè ricordiamo esso riveste le serie di una veste temporale precisa. Qualora lo sviluppo del codice prosegua fuori da Windows, si dovrà ricorrere a diversi metodi di accesso ai tempi macchina. \\
+
+L'interfacciamento con Matlab consta di un header da includere e tre librerie {\em lib} da collegare. Sebbene illustrato a prescindere dal sistema operativo \cite{MATLABC}, esso è stato testato solo in Windows e con una versione Matlab ``portable''. Durante la compilazione è possibile però escludere Matlab, rinunciando ai grafici di output e a un algoritmo di terze parti \cite{CARD} per l'ICA, al cui posto verrebbe compilato del codice analogo ma non testato completamente.
